@@ -1,0 +1,67 @@
+
+<div *ngIf="isLargeScreen; else sidenavBlock">
+  <mat-sidenav-container class="sidenav-container">
+    <!-- Sidenav Content -->
+    <mat-sidenav-content>
+      <app-header></app-header>
+
+      <nav class="nav-bar">
+        <ul class="nav-bar-list">
+          <li
+            class="nav-bar-list-items"
+            *ngFor="let link of navLinks"
+            routerLinkActive="active"
+            [routerLink]="link.path">
+            <a class="nav-bar-list-items-anchor">
+              {{ link.label }}
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <router-outlet></router-outlet>
+      <app-footer></app-footer>
+    </mat-sidenav-content>
+
+  </mat-sidenav-container>
+</div>
+
+<ng-template #sidenavBlock>
+  <!-- Menu Icon -->
+  <button *ngIf="!sidenav.opened" mat-icon-button (click)="sidenav.toggle()" class="burger-menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <!-- SideNav -->
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav mode="over" position="start" >
+      <!-- Title -->
+      <div class="sidenav-title">
+        Tim & Mari
+      </div>
+      <!-- Close Button -->
+      <button mat-icon-button (click)="sidenav.toggle()" class="exit-sidenav">
+        <mat-icon>close</mat-icon>
+      </button>
+      <!-- Router List -->
+      <mat-nav-list>
+        <a
+          mat-list-item
+          *ngFor="let link of navLinks"
+          routerLinkActive="active"
+          [routerLink]="link.path"
+          (click)="sidenav.toggle()">
+          {{ link.label }}
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <!-- Sidenav Content -->
+    <mat-sidenav-content>
+      <app-header></app-header>
+      <router-outlet></router-outlet>
+      <app-footer></app-footer>
+    </mat-sidenav-content>
+
+  </mat-sidenav-container>
+</ng-template>
