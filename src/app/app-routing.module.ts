@@ -3,9 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { ReviewsComponent } from './components/reviews/reviews.component';
 import { LoginComponent } from './components/login/login.component';
+import { MoviesComponent } from './components/movies/movies.component';
+import { ShowsComponent } from './components/shows/shows.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
+  { path: 'movies', component: MoviesComponent },
+  { path: 'shows', component: ShowsComponent },
   { path: 'reviews', component: ReviewsComponent },
   { path: 'login', component: LoginComponent },
   // redirect to `home` if there is no path

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { MaterialModule } from './material.module';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +13,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ReviewsComponent } from './components/reviews/reviews.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
+import { MoviesComponent } from './components/movies/movies.component';
+import { ShowsComponent } from './components/shows/shows.component';
 
 @NgModule({
   declarations: [
@@ -21,13 +24,16 @@ import { HomeComponent } from './components/home/home.component';
     FooterComponent,
     ReviewsComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    MoviesComponent,
+    ShowsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

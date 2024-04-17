@@ -10,10 +10,10 @@ export class SideNavComponent {
 
   navLinks = [
     { path: '/home', label: 'Home' },
+    { path: '/movies', label: 'Movies' },
+    { path: '/shows', label: 'Shows' },
     { path: '/reviews', label: 'Reviews' },
     { path: '/login', label: 'Login' },
-    // { path: '/jar-of-memories', label: 'Jar of Memories' },
-    // { path: '/function-key-5', label: 'Games' },
   ];
 
   constructor() {

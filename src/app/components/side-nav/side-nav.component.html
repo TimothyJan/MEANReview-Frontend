@@ -3,21 +3,29 @@
   <mat-sidenav-container class="sidenav-container">
     <!-- Sidenav Content -->
     <mat-sidenav-content>
-      <app-header></app-header>
+      <!-- <app-header></app-header> -->
+      <div class="header">
 
-      <nav class="nav-bar">
-        <ul class="nav-bar-list">
-          <li
-            class="nav-bar-list-items"
-            *ngFor="let link of navLinks"
-            routerLinkActive="active"
-            [routerLink]="link.path">
-            <a class="nav-bar-list-items-anchor">
-              {{ link.label }}
-            </a>
-          </li>
-        </ul>
-      </nav>
+        <nav class="nav-bar">
+
+          <div class="title">
+            MEAN Reviews
+          </div>
+
+          <ul class="nav-bar-list">
+            <li
+              class="nav-bar-list-items"
+              *ngFor="let link of navLinks"
+              routerLinkActive="active"
+              [routerLink]="link.path">
+              <a class="nav-bar-list-items-anchor">
+                {{ link.label }}
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+      </div>
 
       <router-outlet></router-outlet>
       <app-footer></app-footer>
@@ -37,7 +45,7 @@
     <mat-sidenav #sidenav mode="over" position="start" >
       <!-- Title -->
       <div class="sidenav-title">
-        Tim & Mari
+        Mean Reviews
       </div>
       <!-- Close Button -->
       <button mat-icon-button (click)="sidenav.toggle()" class="exit-sidenav">
