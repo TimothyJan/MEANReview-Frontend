@@ -14,7 +14,7 @@ import { ReviewsComponent } from './components/reviews/reviews.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { MoviesComponent } from './components/movies/movies.component';
-import { ShowsComponent } from './components/shows/shows.component';
+import { TvseriesComponent } from './components/tvseries/tvseries.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,7 @@ import { ShowsComponent } from './components/shows/shows.component';
     LoginComponent,
     HomeComponent,
     MoviesComponent,
-    ShowsComponent
+    TvseriesComponent
   ],
   imports: [
     BrowserModule,

@@ -11,7 +11,7 @@ export class SideNavComponent {
   navLinks = [
     { path: '/home', label: 'Home' },
     { path: '/movies', label: 'Movies' },
-    { path: '/shows', label: 'Shows' },
+    { path: '/tvseries', label: 'TV Shows' },
     { path: '/reviews', label: 'Reviews' },
     { path: '/login', label: 'Login' },
   ];
