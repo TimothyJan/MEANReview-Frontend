@@ -15,6 +15,7 @@ import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { MoviesComponent } from './components/movies/movies.component';
 import { TvseriesComponent } from './components/tvseries/tvseries.component';
+import { CarouselComponent } from './components/carousel/carousel.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { TvseriesComponent } from './components/tvseries/tvseries.component';
     LoginComponent,
     HomeComponent,
     MoviesComponent,
-    TvseriesComponent
+    TvseriesComponent,
+    CarouselComponent
   ],
   imports: [
     BrowserModule,
