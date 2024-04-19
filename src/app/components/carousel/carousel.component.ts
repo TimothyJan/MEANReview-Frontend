@@ -13,6 +13,7 @@ export class CarouselComponent implements OnInit{
   currentIndex = 0;
   itemWidth = 300; // Adjust as needed
   offsetX = 0;
+  loadingData: boolean = true;
 
   constructor(
     private _tmdbService: TmdbService
@@ -20,38 +21,10 @@ export class CarouselComponent implements OnInit{
 
   ngOnInit(): void {
     this.setTitle();
-    this._tmdbService.getMoviesList_Popular().subscribe(data => {
-      for(let index=0; index<data.results.length; index++) {
-        this.items.push(data.results[index]['id']);
-      }
-      console.log(this.items);
-    });
-
-    // this._tmdbService.getMoviesList_NowPlaying().subscribe(data => {
-    //   console.log(data);
-    // });
-    // this._tmdbService.getMoviesList_Upcoming().subscribe(data => {
-    //   console.log(data);
-    // });
-
-    // this._tmdbService.getMoviesList_TopRated().subscribe(data => {
-    //   console.log(data);
-    // });
-
-    // this._tmdbService.getTVSeriesList_Popular().subscribe(data => {
-    //   console.log(data);
-    // });
-    // this._tmdbService.getTVSeriesList_AiringToday().subscribe(data => {
-    //   console.log(data);
-    // });
-    // this._tmdbService.getTVSeriesList_OnTV().subscribe(data => {
-    //   console.log(data);
-    // });
-    // this._tmdbService.getTVSeriesList_TopRated().subscribe(data => {
-    //   console.log(data);
-    // });
+    this.setItems();
   }
 
+  /** Moves carousel to next index */
   next() {
     if (this.currentIndex < this.items.length - 1) {
       this.currentIndex++;
@@ -60,6 +33,7 @@ export class CarouselComponent implements OnInit{
     console.log(this.currentIndex);
   }
 
+  /** Moves carousel to previous index */
   prev() {
     if (this.currentIndex > 0) {
       this.currentIndex--;
@@ -71,10 +45,88 @@ export class CarouselComponent implements OnInit{
     return this.currentIndex === this.items.length - 2;
   }
 
+  /** Gets and sets list of items to be displayed */
   setItems(): void {
-
+    switch(this.dataListType) {
+      case "MoviesList_Popular": {
+        this._tmdbService.getMoviesList_Popular().subscribe(data => {
+          for(let index=0; index<data.results.length; index++) {
+            this.items.push(data.results[index]['id']);
+          }
+          this.loadingData = false;
+        });
+        break;
+      }
+      case "MoviesList_NowPlaying": {
+        this._tmdbService.getMoviesList_NowPlaying().subscribe(data => {
+          for(let index=0; index<data.results.length; index++) {
+            this.items.push(data.results[index]['id']);
+          }
+          this.loadingData = false;
+        });
+        break;
+      }
+      case "MoviesList_Upcoming": {
+        this._tmdbService.getMoviesList_Upcoming().subscribe(data => {
+          for(let index=0; index<data.results.length; index++) {
+            this.items.push(data.results[index]['id']);
+          }
+          this.loadingData = false;
+        });
+        break;
+      }
+      case "MoviesList_TopRated": {
+        this._tmdbService.getMoviesList_TopRated().subscribe(data => {
+          for(let index=0; index<data.results.length; index++) {
+            this.items.push(data.results[index]['id']);
+          }
+          this.loadingData = false;
+        });
+        break;
+      }
+      case "TVSeriesList_Popular": {
+        this._tmdbService.getTVSeriesList_Popular().subscribe(data => {
+          for(let index=0; index<data.results.length; index++) {
+            this.items.push(data.results[index]['id']);
+          }
+          this.loadingData = false;
+        });
+        break;
+      }
+      case "TVSeriesList_AiringToday": {
+        this._tmdbService.getTVSeriesList_AiringToday().subscribe(data => {
+          for(let index=0; index<data.results.length; index++) {
+            this.items.push(data.results[index]['id']);
+          }
+          this.loadingData = false;
+        });
+        break;
+      }
+      case "TVSeriesList_OnTV": {
+        this._tmdbService.getTVSeriesList_OnTV().subscribe(data => {
+          for(let index=0; index<data.results.length; index++) {
+            this.items.push(data.results[index]['id']);
+          }
+          this.loadingData = false;
+        });
+        break;
+      }
+      case "TVSeriesList_TopRated": {
+        this._tmdbService.getTVSeriesList_TopRated().subscribe(data => {
+          for(let index=0; index<data.results.length; index++) {
+            this.items.push(data.results[index]['id']);
+          }
+          this.loadingData = false;
+        });
+        break;
+      }
+      default: {
+        break;
+      }
+    }
   }
 
+  /** Sets Title or Carousel */
   setTitle(): void {
     switch(this.dataListType) {
       case "MoviesList_Popular": {

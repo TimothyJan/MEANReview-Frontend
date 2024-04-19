@@ -16,6 +16,7 @@ import { HomeComponent } from './components/home/home.component';
 import { MoviesComponent } from './components/movies/movies.component';
 import { TvseriesComponent } from './components/tvseries/tvseries.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { CarouselComponent } from './components/carousel/carousel.component';
     HomeComponent,
     MoviesComponent,
     TvseriesComponent,
-    CarouselComponent
+    CarouselComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,

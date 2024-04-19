@@ -1,12 +1,20 @@
-<div class="carousel">
-  <h2 class="carousel-title">{{ title }}</h2>
-  <div class="carousel-inner" [style.transform]="'translateX(' + offsetX + 'px)'">
-    <div class="carousel-item" *ngFor="let item of items">
-      {{ item }}
+
+<div *ngIf="!loadingData; else loadingBlock">
+  <div class="carousel">
+    <h2 class="carousel-title">{{ title }}</h2>
+    <div class="carousel-inner" [style.transform]="'translateX(' + offsetX + 'px)'">
+      <div class="carousel-item" *ngFor="let item of items">
+        {{ item }}
+      </div>
+    </div>
+    <div class="carousel-controls">
+      <button (click)="prev()">&lt;</button>
+      <button (click)="next()" *ngIf="!isLastItem()">&gt;</button>
     </div>
   </div>
-  <div class="carousel-controls">
-    <button (click)="prev()">&lt;</button>
-    <button (click)="next()" *ngIf="!isLastItem()">&gt;</button>
-  </div>
 </div>
+
+<ng-template #loadingBlock>
+  <app-loading-spinner [isLoading]="loadingData"></app-loading-spinner>
+</ng-template>
+
