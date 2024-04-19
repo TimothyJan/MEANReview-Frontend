@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TmdbService } from '../../services/tmdb.service';
+import { TmdbService } from '../../../services/tmdb.service';
 
 @Component({
   selector: 'app-tvseries',

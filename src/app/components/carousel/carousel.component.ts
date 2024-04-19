@@ -25,22 +25,22 @@ export class CarouselComponent implements OnInit{
   }
 
   /** Moves carousel to next index */
-  next() {
+  next(): void {
     if (this.currentIndex < this.items.length - 1) {
       this.currentIndex++;
       this.offsetX = -this.currentIndex * this.itemWidth;
     }
-    console.log(this.currentIndex);
   }
 
   /** Moves carousel to previous index */
-  prev() {
+  prev(): void {
     if (this.currentIndex > 0) {
       this.currentIndex--;
       this.offsetX = -this.currentIndex * this.itemWidth;
     }
   }
 
+  /** Checks if last item in list of items */
   isLastItem(): boolean {
     return this.currentIndex === this.items.length - 2;
   }
