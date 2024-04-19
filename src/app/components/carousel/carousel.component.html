@@ -1,0 +1,12 @@
+<div class="carousel">
+  <h2 class="carousel-title">{{ title }}</h2>
+  <div class="carousel-inner" [style.transform]="'translateX(' + offsetX + 'px)'">
+    <div class="carousel-item" *ngFor="let item of items">
+      {{ item }}
+    </div>
+  </div>
+  <div class="carousel-controls">
+    <button (click)="prev()">&lt;</button>
+    <button (click)="next()" *ngIf="!isLastItem()">&gt;</button>
+  </div>
+</div>

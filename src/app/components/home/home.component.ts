@@ -13,18 +13,7 @@ export class HomeComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    this._tmdbService.getMoviesList_Popular().subscribe(data => {
-      console.log(data);
-    });
-    this._tmdbService.getMoviesList_NowPlaying().subscribe(data => {
-      console.log(data);
-    });
-    this._tmdbService.getMoviesList_Upcoming().subscribe(data => {
-      console.log(data);
-    });
-    this._tmdbService.getMoviesList_TopRated().subscribe(data => {
-      console.log(data);
-    });
+
   }
 
 }
