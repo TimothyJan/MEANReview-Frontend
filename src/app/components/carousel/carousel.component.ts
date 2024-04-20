@@ -9,10 +9,12 @@ import { TmdbService } from '../../services/tmdb.service';
 export class CarouselComponent implements OnInit{
   @Input() dataListType:string = "";
   title:string = ""
+
   items: number[] = [];
   currentIndex = 0;
   itemWidth = 300; // Adjust as needed
-  offsetX = 0;
+  offsetX = 10;
+
   loadingData: boolean = true;
 
   constructor(

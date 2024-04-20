@@ -17,6 +17,8 @@ import { MoviesComponent } from './components/pages/movies/movies.component';
 import { TvseriesComponent } from './components/pages/tvseries/tvseries.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { CarouselItemComponent } from './components/carousel/carousel-item/carousel-item.component';
+import { TitlePipe } from './pipes/title.pipe';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
     MoviesComponent,
     TvseriesComponent,
     CarouselComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    CarouselItemComponent,
+    TitlePipe,
   ],
   imports: [
     BrowserModule,

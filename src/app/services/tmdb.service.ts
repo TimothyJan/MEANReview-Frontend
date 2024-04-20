@@ -17,7 +17,7 @@ export class TmdbService {
   constructor(private http: HttpClient) { }
 
   /** Get Movie Details */
-  getMovieDetails(movieID:string): Observable<MovieDetails> {
+  getMovieDetails(movieID:number): Observable<MovieDetails> {
     const options = {
       method: 'GET',
       headers: {
@@ -81,7 +81,7 @@ export class TmdbService {
   }
 
   /** Get TV Series Details */
-  getTVSeriesDetails(series_id: string, season_number: string, episode_number: string): Observable<TvSeriesDetails> {
+  getTVSeriesDetails(series_id: number, season_number: string, episode_number: string): Observable<TvSeriesDetails> {
     const options = {
       method: 'GET',
       headers: {

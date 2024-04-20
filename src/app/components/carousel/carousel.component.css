@@ -21,9 +21,10 @@
 
 .carousel-item {
   flex: 0 0 auto;
-  width: 300px; /* Adjust width as needed */
-  height: 200px; /* Adjust height as needed */
+  width: 210px;
+  height: 395px;
   background-color: #222;
+  background-color: #fff;
   color: #fff;
   margin-right: 10px;
   border-radius: 5px;
