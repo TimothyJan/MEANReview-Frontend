@@ -71,10 +71,3 @@
   background-color: rgba(0, 0, 0, 0.7);
 }
 
-@media (max-width: 768px) {
-  .carousel-item {
-    width: 200px;
-    height: 150px;
-    font-size: 18px;
-  }
-}

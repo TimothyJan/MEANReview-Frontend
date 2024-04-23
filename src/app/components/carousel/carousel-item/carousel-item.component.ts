@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TmdbService } from '../../../services/tmdb.service';
 import { MovieDetails } from '../../../models/movie-details';
+import { TvSeriesDetails } from '../../../models/tvseries-details';
 
 @Component({
   selector: 'app-carousel-item',
@@ -9,8 +10,9 @@ import { MovieDetails } from '../../../models/movie-details';
 })
 export class CarouselItemComponent implements OnInit {
   @Input() id: number = 0;
-  @Input() movieOrTvseries: string = "";
+  @Input() movieOrTvseries: string = "MOVIES"; // MOVIES or TVSERIES****
   movieDetails: MovieDetails;
+  tvSeriesDetails: TvSeriesDetails;
   loadingData: boolean = true;
 
   constructor(
@@ -18,20 +20,42 @@ export class CarouselItemComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getMovieDetails();
+    switch(this.movieOrTvseries) {
+      case "MOVIES":
+        this.getMovieDetails();
+        break;
+      case "TVSERIES":
+        this.getTvSeriesDetails();
+        break;
+      default:
+        console.log("Movie or Tvseries Error");
+        break;
+    }
   }
 
   getMovieDetails(): void {
     this._tmdbService.getMovieDetails(this.id).subscribe(data => {
       // console.log(data);
       this.movieDetails = {...data};
-      this.setCardDetails();
+      this.setMovieCardDetails();
       this.loadingData = false;
     });
   }
 
-  setCardDetails(): void {
+  setMovieCardDetails(): void {
     this.movieDetails.poster_path = `https://image.tmdb.org/t/p/original/` + this.movieDetails.poster_path;
-    // this.movieDetails.backdrop_path = `https://media.themoviedb.org/t/p/w220_and_h330_face/` + this.movieDetails.backdrop_path;
+  }
+
+  getTvSeriesDetails(): void {
+    this._tmdbService.getTVSeriesDetails(this.id).subscribe(data => {
+      // console.log(data);
+      this.tvSeriesDetails = {...data};
+      this.setTvSeriesCardDetails();
+      this.loadingData = false;
+    });
+  }
+
+  setTvSeriesCardDetails(): void {
+    this.tvSeriesDetails.poster_path = `https://image.tmdb.org/t/p/original/` + this.tvSeriesDetails.poster_path;
   }
 }

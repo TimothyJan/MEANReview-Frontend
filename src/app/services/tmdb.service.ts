@@ -81,7 +81,7 @@ export class TmdbService {
   }
 
   /** Get TV Series Details */
-  getTVSeriesDetails(series_id: number, season_number: string, episode_number: string): Observable<TvSeriesDetails> {
+  getTVSeriesDetails(series_id: number): Observable<TvSeriesDetails> {
     const options = {
       method: 'GET',
       headers: {
@@ -89,7 +89,7 @@ export class TmdbService {
         Authorization: environment.authorizationHeader
       }
     };
-    return this.http.get<TvSeriesDetails>(APITVSERIESROOT + series_id + '/season/' + season_number + '/episode/' + episode_number + '?language=en-US', options)
+    return this.http.get<TvSeriesDetails>(APITVSERIESROOT + series_id + '?language=en-US', options)
   }
 
   /** Get Popular TV Series list */

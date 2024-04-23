@@ -15,6 +15,8 @@ export class CarouselComponent implements OnInit{
   itemWidth = 300; // Adjust as needed
   offsetX = 10;
 
+  movieOrTvseries:string = "";
+
   loadingData: boolean = true;
 
   constructor(
@@ -57,6 +59,7 @@ export class CarouselComponent implements OnInit{
           }
           this.loadingData = false;
         });
+        this.movieOrTvseries = "MOVIES";
         break;
       }
       case "MoviesList_NowPlaying": {
@@ -66,6 +69,7 @@ export class CarouselComponent implements OnInit{
           }
           this.loadingData = false;
         });
+        this.movieOrTvseries = "MOVIES";
         break;
       }
       case "MoviesList_Upcoming": {
@@ -75,6 +79,7 @@ export class CarouselComponent implements OnInit{
           }
           this.loadingData = false;
         });
+        this.movieOrTvseries = "MOVIES";
         break;
       }
       case "MoviesList_TopRated": {
@@ -84,6 +89,7 @@ export class CarouselComponent implements OnInit{
           }
           this.loadingData = false;
         });
+        this.movieOrTvseries = "MOVIES";
         break;
       }
       case "TVSeriesList_Popular": {
@@ -93,6 +99,7 @@ export class CarouselComponent implements OnInit{
           }
           this.loadingData = false;
         });
+        this.movieOrTvseries = "TVSERIES";
         break;
       }
       case "TVSeriesList_AiringToday": {
@@ -102,6 +109,7 @@ export class CarouselComponent implements OnInit{
           }
           this.loadingData = false;
         });
+        this.movieOrTvseries = "TVSERIES";
         break;
       }
       case "TVSeriesList_OnTV": {
@@ -111,6 +119,7 @@ export class CarouselComponent implements OnInit{
           }
           this.loadingData = false;
         });
+        this.movieOrTvseries = "TVSERIES";
         break;
       }
       case "TVSeriesList_TopRated": {
@@ -120,6 +129,7 @@ export class CarouselComponent implements OnInit{
           }
           this.loadingData = false;
         });
+        this.movieOrTvseries = "TVSERIES";
         break;
       }
       default: {

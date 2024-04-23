@@ -4,7 +4,7 @@
     <h2 class="carousel-title">{{ title }}</h2>
     <div class="carousel-inner" [style.transform]="'translateX(' + offsetX + 'px)'">
       <div class="carousel-item" *ngFor="let item of items">
-        <app-carousel-item [id]="item"></app-carousel-item>
+        <app-carousel-item [id]="item" [movieOrTvseries]="movieOrTvseries"></app-carousel-item>
       </div>
     </div>
     <div class="carousel-controls">

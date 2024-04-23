@@ -1,21 +1,48 @@
-<div *ngIf="!loadingData; else loadingBlock">
-  <div class="card">
-    <div class="image">
-      <img [src]="movieDetails.poster_path" alt="{{ movieDetails.title }}" class="card-image">
-    </div>
-    <div class="content">
-      <h2>
-        <a href="">
-          {{ movieDetails.title | title }}
-        </a>
-      </h2>
-      <div class="release-date">
-        <p>
-          {{ movieDetails.release_date }}
-        </p>
+
+<div [ngSwitch]="movieOrTvseries">
+  <div *ngSwitchCase="'MOVIES'">
+    <div *ngIf="!loadingData; else loadingBlock">
+      <div class="card">
+        <div class="image">
+          <img [src]="movieDetails.poster_path" alt="{{ movieDetails.title }}" class="card-image">
+        </div>
+        <div class="content">
+          <h2>
+            <a href="">
+              {{ movieDetails.title | title }}
+            </a>
+          </h2>
+          <div class="release-date">
+            <p>
+              {{ movieDetails.release_date }}
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+  <div *ngSwitchCase="'TVSERIES'">
+    <div *ngIf="!loadingData; else loadingBlock">
+      <div class="card">
+        <div class="image">
+          <img [src]="tvSeriesDetails.poster_path" alt="{{ tvSeriesDetails.name }}" class="card-image">
+        </div>
+        <div class="content">
+          <h2>
+            <a href="">
+              {{ tvSeriesDetails.name | title }}
+            </a>
+          </h2>
+          <div class="release-date">
+            <p>
+              {{ tvSeriesDetails.first_air_date }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <ng-template #loadingBlock>
