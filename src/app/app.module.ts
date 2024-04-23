@@ -8,7 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
-import { HeaderComponent } from './components/header/header.component';
+import { TitleComponent } from './components/title/title.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ReviewsComponent } from './components/pages/reviews/reviews.component';
 import { LoginComponent } from './components/pages/login/login.component';
@@ -24,7 +24,7 @@ import { TitlePipe } from './pipes/title.pipe';
   declarations: [
     AppComponent,
     SideNavComponent,
-    HeaderComponent,
+    TitleComponent,
     FooterComponent,
     ReviewsComponent,
     LoginComponent,

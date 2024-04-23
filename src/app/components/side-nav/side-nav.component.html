@@ -3,14 +3,9 @@
   <mat-sidenav-container class="sidenav-container">
     <!-- Sidenav Content -->
     <mat-sidenav-content>
-      <!-- <app-header></app-header> -->
       <div class="header">
-
         <nav class="nav-bar">
-
-          <div class="title">
-            MEAN Reviews
-          </div>
+          <app-title></app-title>
 
           <ul class="nav-bar-list">
             <li
@@ -44,29 +39,39 @@
   <mat-sidenav-container class="sidenav-container">
     <mat-sidenav #sidenav mode="over" position="start" >
       <!-- Title -->
-      <div class="sidenav-title">
-        Mean Reviews
-      </div>
+      <app-title></app-title>
       <!-- Close Button -->
       <button mat-icon-button (click)="sidenav.toggle()" class="exit-sidenav">
         <mat-icon>close</mat-icon>
       </button>
       <!-- Router List -->
       <mat-nav-list>
-        <a
+        <ul>
+          <li
+            *ngFor="let link of navLinks"
+            routerLinkActive="active"
+            [routerLink]="link.path">
+            <a class="side-nav-list-items-anchor">
+              {{ link.label }}
+            </a>
+          </li>
+        </ul>
+        <!-- <a
           mat-list-item
+          class="side-nav-list-items-anchor"
           *ngFor="let link of navLinks"
           routerLinkActive="active"
-          [routerLink]="link.path"
-          (click)="sidenav.toggle()">
-          {{ link.label }}
-        </a>
+          [routerLink]="link.path">
+            {{ link.label }}
+        </a> -->
       </mat-nav-list>
     </mat-sidenav>
 
     <!-- Sidenav Content -->
     <mat-sidenav-content>
-      <app-header></app-header>
+      <div class="header">
+        <app-title></app-title>
+      </div>
       <router-outlet></router-outlet>
       <app-footer></app-footer>
     </mat-sidenav-content>

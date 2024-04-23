@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TmdbService } from '../../../services/tmdb.service';
 import { MovieDetails } from '../../../models/movie-details';
-import { TitlePipe } from '../../../pipes/title.pipe';
 
 @Component({
   selector: 'app-carousel-item',
