@@ -15,7 +15,7 @@ export class CarouselComponent implements OnInit{
   itemWidth = 300; // Adjust as needed
   offsetX = 10;
 
-  movieOrTvseries:string = "";
+  movieOrTvSeries:string = ""; // MOVIES or TVSERIES****
 
   loadingData: boolean = true;
 
@@ -59,7 +59,7 @@ export class CarouselComponent implements OnInit{
           }
           this.loadingData = false;
         });
-        this.movieOrTvseries = "MOVIES";
+        this.movieOrTvSeries = "MOVIES";
         break;
       }
       case "MoviesList_NowPlaying": {
@@ -69,7 +69,7 @@ export class CarouselComponent implements OnInit{
           }
           this.loadingData = false;
         });
-        this.movieOrTvseries = "MOVIES";
+        this.movieOrTvSeries = "MOVIES";
         break;
       }
       case "MoviesList_Upcoming": {
@@ -79,7 +79,7 @@ export class CarouselComponent implements OnInit{
           }
           this.loadingData = false;
         });
-        this.movieOrTvseries = "MOVIES";
+        this.movieOrTvSeries = "MOVIES";
         break;
       }
       case "MoviesList_TopRated": {
@@ -89,7 +89,7 @@ export class CarouselComponent implements OnInit{
           }
           this.loadingData = false;
         });
-        this.movieOrTvseries = "MOVIES";
+        this.movieOrTvSeries = "MOVIES";
         break;
       }
       case "TVSeriesList_Popular": {
@@ -99,7 +99,7 @@ export class CarouselComponent implements OnInit{
           }
           this.loadingData = false;
         });
-        this.movieOrTvseries = "TVSERIES";
+        this.movieOrTvSeries = "TVSERIES";
         break;
       }
       case "TVSeriesList_AiringToday": {
@@ -109,7 +109,7 @@ export class CarouselComponent implements OnInit{
           }
           this.loadingData = false;
         });
-        this.movieOrTvseries = "TVSERIES";
+        this.movieOrTvSeries = "TVSERIES";
         break;
       }
       case "TVSeriesList_OnTV": {
@@ -119,7 +119,7 @@ export class CarouselComponent implements OnInit{
           }
           this.loadingData = false;
         });
-        this.movieOrTvseries = "TVSERIES";
+        this.movieOrTvSeries = "TVSERIES";
         break;
       }
       case "TVSeriesList_TopRated": {
@@ -129,9 +129,10 @@ export class CarouselComponent implements OnInit{
           }
           this.loadingData = false;
         });
-        this.movieOrTvseries = "TVSERIES";
+        this.movieOrTvSeries = "TVSERIES";
         break;
       }
+      /** Search? */
       default: {
         break;
       }
@@ -142,7 +143,7 @@ export class CarouselComponent implements OnInit{
   setTitle(): void {
     switch(this.dataListType) {
       case "MoviesList_Popular": {
-        this.title = "Popular";
+        this.title = "Popular Movies";
         break;
       }
       case "MoviesList_NowPlaying": {
@@ -150,15 +151,15 @@ export class CarouselComponent implements OnInit{
         break;
       }
       case "MoviesList_Upcoming": {
-        this.title = "Upcoming";
+        this.title = "Upcoming Movies";
         break;
       }
       case "MoviesList_TopRated": {
-        this.title = "Top Rated";
+        this.title = "Top Rated Movies";
         break;
       }
       case "TVSeriesList_Popular": {
-        this.title = "Popular";
+        this.title = "Popular TV Shows";
         break;
       }
       case "TVSeriesList_AiringToday": {
@@ -170,7 +171,7 @@ export class CarouselComponent implements OnInit{
         break;
       }
       case "TVSeriesList_TopRated": {
-        this.title = "Top Rated";
+        this.title = "Top Rated TV Shows";
         break;
       }
       default: {

@@ -29,6 +29,18 @@ export class TmdbService {
     return this.http.get<MovieDetails>(APIMOVIEROOT+movieID+'?language=en-US', options);
   }
 
+  /** Get searched Movie list */
+  getMovieList_Search(query: string): Observable<DataList> {
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: environment.authorizationHeader
+      }
+    };
+    return this.http.get<DataList>(APIMOVIEROOT + '?query=' + query + '&language=en-US&page=1', options)
+  }
+
   /** Get Popular Movie list */
   getMoviesList_Popular(): Observable<DataList> {
     const options = {
@@ -90,6 +102,18 @@ export class TmdbService {
       }
     };
     return this.http.get<TvSeriesDetails>(APITVSERIESROOT + series_id + '?language=en-US', options)
+  }
+
+  /** Get searched TV Series list */
+  getTVSeriesList_Search(query: string): Observable<DataList> {
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: environment.authorizationHeader
+      }
+    };
+    return this.http.get<DataList>(APITVSERIESROOT + 'query=' + query + '?language=en-US', options)
   }
 
   /** Get Popular TV Series list */

@@ -10,7 +10,7 @@ import { TvSeriesDetails } from '../../../models/tvseries-details';
 })
 export class CarouselItemComponent implements OnInit {
   @Input() id: number = 0;
-  @Input() movieOrTvseries: string = "MOVIES"; // MOVIES or TVSERIES****
+  @Input() movieOrTvSeries: string = "MOVIES"; // MOVIES or TVSERIES****
   movieDetails: MovieDetails;
   tvSeriesDetails: TvSeriesDetails;
   loadingData: boolean = true;
@@ -20,7 +20,7 @@ export class CarouselItemComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    switch(this.movieOrTvseries) {
+    switch(this.movieOrTvSeries) {
       case "MOVIES":
         this.getMovieDetails();
         break;

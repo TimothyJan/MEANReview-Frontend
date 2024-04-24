@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { MaterialModule } from './material.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +21,7 @@ import { CarouselComponent } from './components/carousel/carousel.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { CarouselItemComponent } from './components/carousel/carousel-item/carousel-item.component';
 import { TitlePipe } from './pipes/title.pipe';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -35,13 +38,16 @@ import { TitlePipe } from './pipes/title.pipe';
     LoadingSpinnerComponent,
     CarouselItemComponent,
     TitlePipe,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
