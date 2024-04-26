@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { TmdbService } from '../../../services/tmdb.service';
 import { MovieDetails } from '../../../models/movie-details';
 import { TvSeriesDetails } from '../../../models/tvseries-details';
@@ -8,7 +8,7 @@ import { TvSeriesDetails } from '../../../models/tvseries-details';
   templateUrl: './carousel-item.component.html',
   styleUrl: './carousel-item.component.css'
 })
-export class CarouselItemComponent implements OnInit {
+export class CarouselItemComponent implements OnInit, OnChanges {
   @Input() id: number = 0;
   @Input() movieOrTvSeries: string = "MOVIES"; // MOVIES or TVSERIES****
   movieDetails: MovieDetails;
@@ -33,13 +33,33 @@ export class CarouselItemComponent implements OnInit {
     }
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    switch(this.movieOrTvSeries) {
+      case "MOVIES":
+        this.getMovieDetails();
+        break;
+      case "TVSERIES":
+        this.getTvSeriesDetails();
+        break;
+      default:
+        console.log("Movie or Tvseries Error");
+        break;
+    }
+  }
+
   getMovieDetails(): void {
-    this._tmdbService.getMovieDetails(this.id).subscribe(data => {
-      // console.log(data);
-      this.movieDetails = {...data};
-      this.setMovieCardDetails();
-      this.loadingData = false;
-    });
+    this._tmdbService.getMovieDetails(this.id)
+    .subscribe(
+      data => {
+        // console.log(data);
+        this.movieDetails = {...data};
+        this.setMovieCardDetails();
+        this.loadingData = false;
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   setMovieCardDetails(): void {
@@ -47,12 +67,18 @@ export class CarouselItemComponent implements OnInit {
   }
 
   getTvSeriesDetails(): void {
-    this._tmdbService.getTVSeriesDetails(this.id).subscribe(data => {
+    this._tmdbService.getTVSeriesDetails(this.id)
+    .subscribe(
+      data => {
       // console.log(data);
       this.tvSeriesDetails = {...data};
       this.setTvSeriesCardDetails();
       this.loadingData = false;
-    });
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   setTvSeriesCardDetails(): void {

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { TmdbService } from '../../services/tmdb.service';
 
 @Component({
@@ -6,16 +6,16 @@ import { TmdbService } from '../../services/tmdb.service';
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.css'
 })
-export class CarouselComponent implements OnInit{
+export class CarouselComponent implements OnInit, OnChanges {
   @Input() dataListType:string = "";
+  @Input() movieOrTvSeries: string = "";
+  @Input() query: string = "";
   title:string = ""
 
   items: number[] = [];
   currentIndex = 0;
   itemWidth = 300; // Adjust as needed
   offsetX = 10;
-
-  movieOrTvSeries:string = ""; // MOVIES or TVSERIES****
 
   loadingData: boolean = true;
 
@@ -25,6 +25,11 @@ export class CarouselComponent implements OnInit{
 
   ngOnInit(): void {
     this.setTitle();
+    this.setItems();
+  }
+
+  /** When query search is changed, carousel item list is reset */
+  ngOnChanges(changes: SimpleChanges): void {
     this.setItems();
   }
 
@@ -46,11 +51,13 @@ export class CarouselComponent implements OnInit{
 
   /** Checks if last item in list of items */
   isLastItem(): boolean {
-    return this.currentIndex === this.items.length - 2;
+    return this.currentIndex >= this.items.length - 10;
   }
 
-  /** Gets and sets list of items to be displayed */
+  /** Reset item list first, then gets and sets list of items to be displayed */
   setItems(): void {
+    this.items = []
+    this.loadingData = true;
     switch(this.dataListType) {
       case "MoviesList_Popular": {
         this._tmdbService.getMoviesList_Popular().subscribe(data => {
@@ -59,7 +66,6 @@ export class CarouselComponent implements OnInit{
           }
           this.loadingData = false;
         });
-        this.movieOrTvSeries = "MOVIES";
         break;
       }
       case "MoviesList_NowPlaying": {
@@ -69,7 +75,6 @@ export class CarouselComponent implements OnInit{
           }
           this.loadingData = false;
         });
-        this.movieOrTvSeries = "MOVIES";
         break;
       }
       case "MoviesList_Upcoming": {
@@ -79,7 +84,6 @@ export class CarouselComponent implements OnInit{
           }
           this.loadingData = false;
         });
-        this.movieOrTvSeries = "MOVIES";
         break;
       }
       case "MoviesList_TopRated": {
@@ -89,7 +93,6 @@ export class CarouselComponent implements OnInit{
           }
           this.loadingData = false;
         });
-        this.movieOrTvSeries = "MOVIES";
         break;
       }
       case "TVSeriesList_Popular": {
@@ -99,7 +102,6 @@ export class CarouselComponent implements OnInit{
           }
           this.loadingData = false;
         });
-        this.movieOrTvSeries = "TVSERIES";
         break;
       }
       case "TVSeriesList_AiringToday": {
@@ -109,7 +111,6 @@ export class CarouselComponent implements OnInit{
           }
           this.loadingData = false;
         });
-        this.movieOrTvSeries = "TVSERIES";
         break;
       }
       case "TVSeriesList_OnTV": {
@@ -119,7 +120,6 @@ export class CarouselComponent implements OnInit{
           }
           this.loadingData = false;
         });
-        this.movieOrTvSeries = "TVSERIES";
         break;
       }
       case "TVSeriesList_TopRated": {
@@ -129,11 +129,33 @@ export class CarouselComponent implements OnInit{
           }
           this.loadingData = false;
         });
-        this.movieOrTvSeries = "TVSERIES";
         break;
       }
       /** Search? */
       default: {
+        switch(this.movieOrTvSeries) {
+          case "MOVIES": {
+            this._tmdbService.getMovieList_Search(this.query).subscribe(data => {
+              for(let index=0; index<data.results.length; index++) {
+                this.items.push(data.results[index]['id']);
+              }
+              this.loadingData = false;
+            });
+            break;
+          }
+          case "TVSERIES": {
+            this._tmdbService.getTVSeriesList_Search(this.query).subscribe(data => {
+              for(let index=0; index<data.results.length; index++) {
+                this.items.push(data.results[index]['id']);
+              }
+              this.loadingData = false;
+            });
+            break;
+          }
+          default:
+            console.log("movieOrTvSeries issue");
+            break;
+        }
         break;
       }
     }
@@ -175,7 +197,7 @@ export class CarouselComponent implements OnInit{
         break;
       }
       default: {
-        this.title = "Loading...";
+        this.title = "Search Results: ";
         break;
       }
     }

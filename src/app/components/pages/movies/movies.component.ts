@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { TmdbService } from '../../../services/tmdb.service';
 
 @Component({
   selector: 'app-movies',

@@ -1,11 +1,21 @@
 <div class="container">
   <div class="search-container">
-    <input class="search-bar" [placeholder]="searchPlaceholder" [(ngModel)]="query" (ngModelChange)="onChange($event)">
-    <!-- <button class="submit-button" mat-button matSuffix aria-label="Search">
+    <input class="search-bar" [placeholder]="searchPlaceholder" [(ngModel)]="query">
+    <button
+      class="submit-button"
+      mat-button
+      matSuffix
+      aria-label="Search"
+      (click)="onSearch(query)">
       <mat-icon>search</mat-icon>
-    </button> -->
+    </button>
   </div>
 </div>
+
+<div *ngIf="searchCarousel">
+  <app-carousel [movieOrTvSeries]="movieOrTvSeries" [query]="query"></app-carousel>
+</div>
+
 
 
 

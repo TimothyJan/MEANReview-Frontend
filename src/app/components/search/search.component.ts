@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { TmdbService } from '../../services/tmdb.service';
 
 @Component({
@@ -10,31 +10,17 @@ export class SearchComponent implements OnInit {
   @Input() movieOrTvSeries: string = "MOVIES"; // MOVIES or TVSERIES****
   searchPlaceholder: string = "";
   query: string = "";
+  searchCarousel: boolean = false;
 
   constructor(
-    private _tmdbService: TmdbService
+    private _tmdbService: TmdbService,
   ) {}
 
   ngOnInit(): void {
     this.setSearchPlaceholder();
   }
 
-  onChange(query:string): void {
-    switch(this.movieOrTvSeries) {
-      case "MOVIES":
-        console.log("MOVIES:" + query);
-        this.getMovieList_Search(query);
-        break;
-      case "TVSERIES":
-        console.log("TVSERIES:" + query);
-        this.getTVSeriesList_Search(query);
-        break;
-      default:
-        console.log("movieOrTvSeries issue");
-        break;
-    }
-  }
-
+  /** Set Search Placeholder in the input */
   setSearchPlaceholder(): void {
     switch(this.movieOrTvSeries) {
       case "MOVIES":
@@ -49,11 +35,17 @@ export class SearchComponent implements OnInit {
     }
   }
 
-  getMovieList_Search(query: string): void {
-
-  }
-
-  getTVSeriesList_Search(query: string): void {
-
+  /** Opens carousel with search results */
+  onSearch(query:string): void {
+    this.searchCarousel = true;
+    switch(this.movieOrTvSeries) {
+      case "MOVIES":
+        break;
+      case "TVSERIES":
+        break;
+      default:
+        console.log("movieOrTvSeries issue");
+        break;
+    }
   }
 }

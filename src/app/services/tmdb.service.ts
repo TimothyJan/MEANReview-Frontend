@@ -38,7 +38,7 @@ export class TmdbService {
         Authorization: environment.authorizationHeader
       }
     };
-    return this.http.get<DataList>(APIMOVIEROOT + '?query=' + query + '&language=en-US&page=1', options)
+    return this.http.get<DataList>('https://api.themoviedb.org/3/search/movie?query=' + query + '&include_adult=true&language=en-US&page=1', options)
   }
 
   /** Get Popular Movie list */
@@ -113,7 +113,7 @@ export class TmdbService {
         Authorization: environment.authorizationHeader
       }
     };
-    return this.http.get<DataList>(APITVSERIESROOT + 'query=' + query + '?language=en-US', options)
+    return this.http.get<DataList>('https://api.themoviedb.org/3/search/tv?query=' + query + '&include_adult=true?language=en-US', options)
   }
 
   /** Get Popular TV Series list */
