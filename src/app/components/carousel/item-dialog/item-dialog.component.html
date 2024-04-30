@@ -38,19 +38,11 @@
                 <mat-label>Rating (out of 5):</mat-label>
                 <br>
                 <input matInput type="number" min="0" max="5" formControlName="rating">
-                <!-- <span>
-                  <div *ngIf="(reviewForm.controls['rating'].dirty || reviewForm.controls['rating'].touched)">
-                    <div *ngIf="reviewForm.controls['rating'].errors?.['required']">
-                      <mat-error>Rating is required.</mat-error>
-                    </div>
-                  </div>
-                </span> -->
               </div>
-            <div class="review-item">
+            <div class="rating-error">
               <div *ngIf="(reviewForm.controls['rating'].dirty || reviewForm.controls['rating'].touched)">
                 <div *ngIf="reviewForm.controls['rating'].errors?.['required']">
                   <mat-error>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     Rating is required.
                   </mat-error>
                 </div>
@@ -63,17 +55,11 @@
                 <mat-form-field>
                   <textarea matInput placeholder="This movie made me feel..." rows="3" formControlName="review"></textarea>
                 </mat-form-field>
-                <!-- <div *ngIf="(reviewForm.controls['review'].dirty || reviewForm.controls['review'].touched)">
-                  <div *ngIf="reviewForm.controls['review'].errors?.['required']">
-                    <mat-error>Review is required.</mat-error>
-                  </div>
-                </div> -->
               </div>
-              <div class="review-item">
+              <div class="review-error">
                 <div *ngIf="(reviewForm.controls['review'].dirty || reviewForm.controls['review'].touched)">
                   <div *ngIf="reviewForm.controls['review'].errors?.['required']">
                     <mat-error>
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                       Review is required.
                     </mat-error>
                   </div>
