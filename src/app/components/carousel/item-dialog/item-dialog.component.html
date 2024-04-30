@@ -1,0 +1,110 @@
+
+<div *ngIf="!loadingData; else loadingBlock">
+  <div class="dialog-container">
+
+    <!-- Poster -->
+    <div class="poster-wrapper">
+      <div [ngSwitch]="this.data.movieOrTvSeries">
+        <div *ngSwitchCase="'MOVIES'">
+          <img [src]="movieDetails.poster_path" alt="{{ movieDetails.title }}" class="poster-image">
+        </div>
+        <div *ngSwitchCase="'TVSERIES'">
+          <img [src]="tvSeriesDetails.poster_path" alt="{{ tvSeriesDetails.name }}" class="poster-image">
+        </div>
+      </div>
+    </div>
+
+    <!-- Dialog Content -->
+    <div class="header-poster-wrapper">
+
+      <div [ngSwitch]="this.data.movieOrTvSeries">
+        <div *ngSwitchCase="'MOVIES'">
+          <div class="title-container">
+            <h1>
+              {{ movieDetails.title }}
+              <span class="title-release-date">{{ movieDetails.release_date | date: 'yyyy' }}</span>
+            </h1>
+            <p>{{ genreList }}</p>
+          </div>
+          <div class="info-container">
+            <h3>Overview: </h3>
+            <p>{{ movieDetails.overview }}</p>
+          </div>
+
+          <form [formGroup]="reviewForm" (ngSubmit)="onSubmitReview()">
+            <div class="review-container">
+              <!-- Rating -->
+              <div class="review-item">
+                <mat-label>Rating (out of 5):</mat-label>
+                <br>
+                <input matInput type="number" min="0" max="5" formControlName="rating">
+                <!-- <span>
+                  <div *ngIf="(reviewForm.controls['rating'].dirty || reviewForm.controls['rating'].touched)">
+                    <div *ngIf="reviewForm.controls['rating'].errors?.['required']">
+                      <mat-error>Rating is required.</mat-error>
+                    </div>
+                  </div>
+                </span> -->
+              </div>
+            <div class="review-item">
+              <div *ngIf="(reviewForm.controls['rating'].dirty || reviewForm.controls['rating'].touched)">
+                <div *ngIf="reviewForm.controls['rating'].errors?.['required']">
+                  <mat-error>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    Rating is required.
+                  </mat-error>
+                </div>
+              </div>
+            </div>
+              <!-- Review -->
+              <div class="review-item">
+                <mat-label>Review: </mat-label>
+                <br>
+                <mat-form-field>
+                  <textarea matInput placeholder="This movie made me feel..." rows="3" formControlName="review"></textarea>
+                </mat-form-field>
+                <!-- <div *ngIf="(reviewForm.controls['review'].dirty || reviewForm.controls['review'].touched)">
+                  <div *ngIf="reviewForm.controls['review'].errors?.['required']">
+                    <mat-error>Review is required.</mat-error>
+                  </div>
+                </div> -->
+              </div>
+              <div class="review-item">
+                <div *ngIf="(reviewForm.controls['review'].dirty || reviewForm.controls['review'].touched)">
+                  <div *ngIf="reviewForm.controls['review'].errors?.['required']">
+                    <mat-error>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      Review is required.
+                    </mat-error>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <div class="dialog-buttons">
+            <button mat-raised-button color="primary" color="warn" (click)="onNoClick()">Cancel</button>
+            <button mat-raised-button color="primary" (click)="onSubmitReview()">Add Review</button>
+          </div>
+
+        </div>
+        <div *ngSwitchCase="'TVSERIES'">
+          <img [src]="tvSeriesDetails.poster_path" alt="{{ tvSeriesDetails.name }}" class="poster-image">
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <!-- <div class="review-item">
+        <button mat-raised-button color="primary" color="warn" (click)="onNoClick()">Cancel</button>
+        <button mat-raised-button color="primary" (click)="onSubmitReview()">Add Review</button>
+      </div> -->
+
+
+    </div>
+
+  </div>
+</div>
+
+<ng-template #loadingBlock>
+  <app-loading-spinner [isLoading]="loadingData"></app-loading-spinner>
+</ng-template>

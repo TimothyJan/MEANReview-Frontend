@@ -1,0 +1,113 @@
+
+h1 {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-size:2rem;
+}
+
+p {
+  margin: 0px;
+}
+
+h3 {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  /* font-size: 2.2rem; */
+}
+
+mat-label {
+  padding-right: 10px;
+  font-weight: bold;
+}
+
+mat-form-field {
+  width:100%;
+  margin-bottom: -1.25em;
+  /* padding-bottom: 2%; */
+}
+
+mat-error {
+  line-height: 1;
+}
+
+/* @media screen and (max-width: 768px) {
+  .dialog-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+} */
+
+.dialog-container {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.poster-wrapper {
+  border-width: 0;
+  min-width: 325px;
+  width: 325px;
+  height: 500px;
+  overflow: hidden;
+  border-radius: var(--imageBorderRadius);
+}
+
+.poster-image {
+  display: block;
+  min-width: 325px;
+  width: 325px;
+  height: 500px;
+  position: relative;
+  top: 0;
+  left: 0;
+  border-radius: var(--imageBorderRadius);
+  overflow: hidden;
+}
+
+.header-poster-wrapper {
+  display: flex;
+  padding: 12px;
+}
+
+.title-container {
+  width: 100%;
+  margin-bottom: 12px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.info-container {
+  padding-bottom: 6px;
+}
+
+.review-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.review-item {
+  display: flex;
+  padding-bottom: 3px;
+}
+
+input[type="number"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 200px;
+  outline: none;
+}
+
+.dialog-buttons {
+  /* position:absolute; */
+  display: flex;
+  justify-content: end;
+}
+
+button {
+  margin-left: 1rem;
+  /* margin-bottom: -2rem; */
+}

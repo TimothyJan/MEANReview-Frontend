@@ -22,6 +22,7 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
 import { CarouselItemComponent } from './components/carousel/carousel-item/carousel-item.component';
 import { TitlePipe } from './pipes/title.pipe';
 import { SearchComponent } from './components/search/search.component';
+import { ItemDialogComponent } from './components/carousel/item-dialog/item-dialog.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { SearchComponent } from './components/search/search.component';
     CarouselItemComponent,
     TitlePipe,
     SearchComponent,
+    ItemDialogComponent,
   ],
   imports: [
     BrowserModule,

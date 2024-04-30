@@ -37,6 +37,7 @@ h2 {
 .content a {
   font-weight: 700;
   font-size: 1em;
+  color: #000;
 }
 
 .content .release-date p {

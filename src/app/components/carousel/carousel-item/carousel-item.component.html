@@ -4,11 +4,13 @@
     <div *ngIf="!loadingData; else loadingBlock">
       <div class="card">
         <div class="image">
-          <img [src]="movieDetails.poster_path" alt="{{ movieDetails.title }}" class="card-image">
+          <a [routerLink]="" (click)="openDialog()">
+            <img [src]="movieDetails.poster_path" alt="{{ movieDetails.title }}">
+          </a>
         </div>
         <div class="content">
           <h2>
-            <a href="">
+            <a [routerLink]="" (click)="openDialog()">
               {{ movieDetails.title | title }}
             </a>
           </h2>
@@ -25,11 +27,13 @@
     <div *ngIf="!loadingData; else loadingBlock">
       <div class="card">
         <div class="image">
-          <img [src]="tvSeriesDetails.poster_path" alt="{{ tvSeriesDetails.name }}" class="card-image">
+          <a [routerLink]="" (click)="openDialog()">
+            <img [src]="tvSeriesDetails.poster_path" alt="{{ tvSeriesDetails.name }}">
+          </a>
         </div>
         <div class="content">
           <h2>
-            <a href="">
+            <a [routerLink]="" (click)="openDialog()">
               {{ tvSeriesDetails.name | title }}
             </a>
           </h2>
