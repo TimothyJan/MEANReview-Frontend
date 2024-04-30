@@ -23,6 +23,7 @@ import { CarouselItemComponent } from './components/carousel/carousel-item/carou
 import { TitlePipe } from './pipes/title.pipe';
 import { SearchComponent } from './components/search/search.component';
 import { ItemDialogComponent } from './components/carousel/item-dialog/item-dialog.component';
+import { StarRatingComponent } from './components/star-rating/star-rating.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { ItemDialogComponent } from './components/carousel/item-dialog/item-dial
     TitlePipe,
     SearchComponent,
     ItemDialogComponent,
+    StarRatingComponent,
   ],
   imports: [
     BrowserModule,

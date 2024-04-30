@@ -1,0 +1,3 @@
+<div class="star-rating" (mouseover)="highlightStar($event)" (mouseleave)="resetStars()" (click)="rate($event)">
+  <span class="star" *ngFor="let star of stars; let i = index" [class.highlighted]="i < currentRating" [attr.data-value]="i + 1">&#9733;</span>
+</div>

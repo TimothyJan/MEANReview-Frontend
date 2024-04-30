@@ -19,7 +19,7 @@ export class ItemDialogComponent {
   genreList: string = "";
 
   reviewForm  = new FormGroup({
-    rating: new FormControl({value: 0, disabled: false}, [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
+    rating: new FormControl({value: 0, disabled: false}, [Validators.required, Validators.pattern(/^-?(0|[1-5]\d*)?$/)]),
     review: new FormControl({value: "", disabled: false}, [Validators.required]),
   });
 
@@ -76,7 +76,7 @@ export class ItemDialogComponent {
     this._tmdbService.getTVSeriesDetails(this.data.id)
     .subscribe(
       data => {
-      // console.log(data);
+      console.log(data);
       this.tvSeriesDetails = {...data};
       this.setTvSeriesCardDetails();
       this.loadingData = false;
@@ -90,14 +90,27 @@ export class ItemDialogComponent {
   /** Set TV Series Details */
   setTvSeriesCardDetails(): void {
     this.tvSeriesDetails.poster_path = `https://image.tmdb.org/t/p/original/` + this.tvSeriesDetails.poster_path;
+    // Set Genre List
+    for(let genreId of this.tvSeriesDetails.genres) {
+      this.genreList += genreId.name + " ";
+    }
   }
 
+  /** Sets rating value from the star-rating component */
+  setRating(setRating: number): void {
+    this.reviewForm.controls['rating'].setValue(setRating);
+  }
+
+  /** Submits review to database */
   onSubmitReview(): void {
-    if (this.reviewForm.valid) {}
+    if (this.reviewForm.valid) {
+      console.log(this.reviewForm.value);
+    }
+    this._dialogRef.close();
   }
 
   /** Closes Dialog */
-  onNoClick(): void {
+  onCloseDialog(): void {
     this._dialogRef.close();
   }
 }

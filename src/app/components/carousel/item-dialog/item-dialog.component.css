@@ -1,4 +1,8 @@
 
+h1, h3, p, mat-label {
+  color:#fff;
+}
+
 h1 {
   width: 100%;
   margin: 0;
@@ -14,12 +18,15 @@ h3 {
   width: 100%;
   margin: 0;
   padding: 0;
-  /* font-size: 2.2rem; */
 }
 
 mat-label {
   padding-right: 10px;
   font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 mat-form-field {
@@ -36,6 +43,15 @@ mat-error {
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
+  background-color: #456;
+}
+
+.close-dialog {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 100;
+  color: #90cea1;
 }
 
 .poster-wrapper {
@@ -44,7 +60,8 @@ mat-error {
   border-width: 0;
   min-width: 325px;
   width: 325px;
-  height: 500px;
+  /* height: 500px; */
+  height: 100%;
   overflow: hidden;
   border-radius: var(--imageBorderRadius);
 }
@@ -73,6 +90,10 @@ mat-error {
   flex-wrap: wrap;
 }
 
+.title-release-date {
+  opacity: .5;
+}
+
 .info-container {
   padding-bottom: 6px;
 }
@@ -91,14 +112,14 @@ mat-error {
 
 .rating-error {
   display: flex;
-  justify-content: center;
+  justify-content: end;
   padding-bottom: 3px;
 }
 
 .review-error {
   display: flex;
   justify-content: end;
-  padding-bottom: 3px;
+  padding-bottom: 6px;
 }
 
 input[type="number"] {
@@ -121,9 +142,19 @@ button {
   /* margin-bottom: -2rem; */
 }
 
+.mat-mdc-raised-button:not(:disabled) {
+  background-color: #90cea1;
+}
+
 @media screen and (max-width: 768px) {
   .dialog-container {
     display: flex;
     flex-wrap: wrap;
+  }
+
+  .rating-error {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 3px;
   }
 }
