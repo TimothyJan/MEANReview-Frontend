@@ -25,6 +25,7 @@ export class SideNavComponent {
     this.checkScreenSize();
   }
 
+  /** Changes css based on screen size */
   checkScreenSize() {
     this.isLargeScreen = window.innerWidth > 768; // Adjust breakpoint as needed
   }

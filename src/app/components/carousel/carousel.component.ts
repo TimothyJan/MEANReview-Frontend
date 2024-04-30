@@ -131,7 +131,7 @@ export class CarouselComponent implements OnInit, OnChanges {
         });
         break;
       }
-      /** Search? */
+      /** Search */
       default: {
         switch(this.movieOrTvSeries) {
           case "MOVIES": {

@@ -14,7 +14,9 @@ const APITVSERIESROOT = "https://api.themoviedb.org/3/tv/";
 })
 export class TmdbService {
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
   /** Get Movie Details */
   getMovieDetails(movieID:number): Observable<MovieDetails> {
@@ -25,7 +27,6 @@ export class TmdbService {
         Authorization: environment.authorizationHeader
       }
     };
-
     return this.http.get<MovieDetails>(APIMOVIEROOT+movieID+'?language=en-US', options);
   }
 
@@ -50,7 +51,6 @@ export class TmdbService {
         Authorization: environment.authorizationHeader
       }
     };
-
     return this.http.get<DataList>(APIMOVIEROOT + 'popular?language=en-US&page=1', options);
   }
 
@@ -63,7 +63,6 @@ export class TmdbService {
         Authorization: environment.authorizationHeader
       }
     };
-
     return this.http.get<DataListWithDates>(APIMOVIEROOT + 'now_playing?language=en-US&page=1', options);
   }
 
@@ -76,7 +75,6 @@ export class TmdbService {
         Authorization: environment.authorizationHeader
       }
     };
-
     return this.http.get<DataListWithDates>(APIMOVIEROOT + 'upcoming?language=en-US&page=1', options);
   }
 
