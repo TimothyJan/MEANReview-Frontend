@@ -10,7 +10,7 @@ export interface TvSeriesDetails {
   created_by: Creator[];
   episode_run_time: number[];
   first_air_date: string;
-  genre: Genre[];
+  genres: Genre[];
   homepage: string;
   id: number;
   in_production: boolean;
