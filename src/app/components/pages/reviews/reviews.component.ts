@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, SimpleChanges } from '@angular/core';
+import { MovieReviewsService } from '../../../services/movie-reviews.service';
+import { Review } from '../../../models/review';
 
 @Component({
   selector: 'app-reviews',

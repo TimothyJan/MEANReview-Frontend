@@ -70,3 +70,7 @@
   background-color: rgba(0, 0, 0, 0.7);
 }
 
+.no-reviews {
+  display: flex;
+  justify-content: center;
+}

@@ -97,7 +97,8 @@
               <div class="review-item">
                 <mat-label>Rating (out of 5):</mat-label>
                 <br>
-                <input matInput type="number" min="0" max="5" formControlName="rating">
+                <app-star-rating [rating]=0 (ratingChange)="setRating($event)"></app-star-rating>
+                <!-- <input matInput type="number" min="0" max="5" formControlName="rating"> -->
               </div>
             <div class="rating-error">
               <div *ngIf="(reviewForm.controls['rating'].dirty || reviewForm.controls['rating'].touched)">

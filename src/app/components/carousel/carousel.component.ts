@@ -1,5 +1,7 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { TmdbService } from '../../services/tmdb.service';
+import { MovieReviewsService } from '../../services/movie-reviews.service';
+import { TVseriesReviewsService } from '../../services/tvseries-reviews.service';
 
 @Component({
   selector: 'app-carousel',
@@ -20,7 +22,9 @@ export class CarouselComponent implements OnInit, OnChanges {
   loadingData: boolean = true;
 
   constructor(
-    private _tmdbService: TmdbService
+    private _tmdbService: TmdbService,
+    private _movieReviewsService: MovieReviewsService,
+    private _tvSeriesReviewsService: TVseriesReviewsService
   ) {}
 
   ngOnInit(): void {
@@ -31,6 +35,56 @@ export class CarouselComponent implements OnInit, OnChanges {
   /** When query search is changed, carousel item list is reset */
   ngOnChanges(changes: SimpleChanges): void {
     this.setItems();
+  }
+
+  /** Sets Title or Carousel */
+  setTitle(): void {
+    switch(this.dataListType) {
+      case "MoviesList_Popular": {
+        this.title = "Popular Movies";
+        break;
+      }
+      case "MoviesList_NowPlaying": {
+        this.title = "Now Playing";
+        break;
+      }
+      case "MoviesList_Upcoming": {
+        this.title = "Upcoming Movies";
+        break;
+      }
+      case "MoviesList_TopRated": {
+        this.title = "Top Rated Movies";
+        break;
+      }
+      case "TVSeriesList_Popular": {
+        this.title = "Popular TV Shows";
+        break;
+      }
+      case "MoviesList_Reviews": {
+        this.title = "Movies";
+        break;
+      }
+      case "TVSeriesList_AiringToday": {
+        this.title = "Airing Today";
+        break;
+      }
+      case "TVSeriesList_OnTV": {
+        this.title = "On TV";
+        break;
+      }
+      case "TVSeriesList_TopRated": {
+        this.title = "Top Rated TV Shows";
+        break;
+      }
+      case "TVSeriesList_Reviews": {
+        this.title = "TV Shows";
+        break;
+      }
+      default: {
+        this.title = "Search Results: ";
+        break;
+      }
+    }
   }
 
   /** Moves carousel to next index */
@@ -95,6 +149,14 @@ export class CarouselComponent implements OnInit, OnChanges {
         });
         break;
       }
+      case "MoviesList_Reviews": {
+        let reviews = this._movieReviewsService.getReviews();
+        for(let index=0; index<reviews.length; index++) {
+          this.items.push(reviews[index].movieId);
+        }
+        this.loadingData = false;
+        break;
+      }
       case "TVSeriesList_Popular": {
         this._tmdbService.getTVSeriesList_Popular().subscribe(data => {
           for(let index=0; index<data.results.length; index++) {
@@ -131,7 +193,15 @@ export class CarouselComponent implements OnInit, OnChanges {
         });
         break;
       }
-      /** Search */
+      case "TVSeriesList_Reviews": {
+        let reviews = this._tvSeriesReviewsService.getReviews();
+        for(let index=0; index<reviews.length; index++) {
+          this.items.push(reviews[index].tvSeriesId);
+        }
+        this.loadingData = false;
+        break;
+      }
+      /** Custom Search */
       default: {
         switch(this.movieOrTvSeries) {
           case "MOVIES": {
@@ -156,48 +226,6 @@ export class CarouselComponent implements OnInit, OnChanges {
             console.log("movieOrTvSeries issue");
             break;
         }
-        break;
-      }
-    }
-  }
-
-  /** Sets Title or Carousel */
-  setTitle(): void {
-    switch(this.dataListType) {
-      case "MoviesList_Popular": {
-        this.title = "Popular Movies";
-        break;
-      }
-      case "MoviesList_NowPlaying": {
-        this.title = "Now Playing";
-        break;
-      }
-      case "MoviesList_Upcoming": {
-        this.title = "Upcoming Movies";
-        break;
-      }
-      case "MoviesList_TopRated": {
-        this.title = "Top Rated Movies";
-        break;
-      }
-      case "TVSeriesList_Popular": {
-        this.title = "Popular TV Shows";
-        break;
-      }
-      case "TVSeriesList_AiringToday": {
-        this.title = "Airing Today";
-        break;
-      }
-      case "TVSeriesList_OnTV": {
-        this.title = "On TV";
-        break;
-      }
-      case "TVSeriesList_TopRated": {
-        this.title = "Top Rated TV Shows";
-        break;
-      }
-      default: {
-        this.title = "Search Results: ";
         break;
       }
     }

@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { TmdbService } from '../../../services/tmdb.service';
 import { MovieDetails } from '../../../models/movie-details';
-import { TvSeriesDetails } from '../../../models/tvseries-details';
+import { TVSeriesDetails } from '../../../models/tvseries-details';
 import { MatDialog } from '@angular/material/dialog';
 import { ItemDialogComponent } from '../item-dialog/item-dialog.component';
 
@@ -12,9 +12,9 @@ import { ItemDialogComponent } from '../item-dialog/item-dialog.component';
 })
 export class CarouselItemComponent implements OnInit {
   @Input() id: number = 0;
-  @Input() movieOrTvSeries: string = "MOVIES"; // MOVIES or TVSERIES****
+  @Input() movieOrTvSeries: string = ""; // MOVIES or TVSERIES****
   movieDetails: MovieDetails;
-  tvSeriesDetails: TvSeriesDetails;
+  tvSeriesDetails: TVSeriesDetails;
   loadingData: boolean = true;
 
   constructor(
@@ -88,7 +88,7 @@ export class CarouselItemComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      // console.log('The dialog was closed');
     });
   }
 }

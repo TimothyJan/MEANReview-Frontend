@@ -2,9 +2,11 @@ import { Component, Inject, Input } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ItemIdType } from '../../../models/item-id-type';
 import { MovieDetails } from '../../../models/movie-details';
-import { TvSeriesDetails } from '../../../models/tvseries-details';
+import { TVSeriesDetails } from '../../../models/tvseries-details';
 import { TmdbService } from '../../../services/tmdb.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MovieReviewsService } from '../../../services/movie-reviews.service';
+import { TVseriesReviewsService } from '../../../services/tvseries-reviews.service';
 
 @Component({
   selector: 'app-item-dialog',
@@ -15,10 +17,12 @@ export class ItemDialogComponent {
 
   loadingData: boolean = true;
   movieDetails: MovieDetails;
-  tvSeriesDetails: TvSeriesDetails;
+  tvSeriesDetails: TVSeriesDetails;
   genreList: string = "";
 
   reviewForm  = new FormGroup({
+    movieId: new FormControl({value: 0, disabled: false}),
+    tvSeriesId: new FormControl({value: 0, disabled: false}),
     rating: new FormControl({value: 0, disabled: false}, [Validators.required, Validators.pattern(/^-?(0|[1-5]\d*)?$/)]),
     review: new FormControl({value: "", disabled: false}, [Validators.required]),
   });
@@ -26,18 +30,25 @@ export class ItemDialogComponent {
   constructor(
     private _dialogRef: MatDialogRef<ItemDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ItemIdType,
+    public dialog: MatDialog,
     private _tmdbService: TmdbService,
-    public dialog: MatDialog
+    private _movieReviewsService: MovieReviewsService,
+    private _tvReviewsService: TVseriesReviewsService
   ) {}
 
   ngOnInit(): void {
     this._dialogRef.updateSize("1050px", "500px");
+    /** Get movie details to populate component, disable id per movieOrTvSeries */
     switch(this.data.movieOrTvSeries) {
       case "MOVIES":
         this.getMovieDetails();
+        this.reviewForm.controls['tvSeriesId'].disable();
+        this.reviewForm.controls['movieId'].setValue(this.data.id);
         break;
       case "TVSERIES":
         this.getTvSeriesDetails();
+        this.reviewForm.controls['movieId'].disable();
+        this.reviewForm.controls['tvSeriesId'].setValue(this.data.id);
         break;
       default:
         console.log("Movie or Tvseries Error");
@@ -76,7 +87,7 @@ export class ItemDialogComponent {
     this._tmdbService.getTVSeriesDetails(this.data.id)
     .subscribe(
       data => {
-      console.log(data);
+      // console.log(data);
       this.tvSeriesDetails = {...data};
       this.setTvSeriesCardDetails();
       this.loadingData = false;
@@ -104,9 +115,20 @@ export class ItemDialogComponent {
   /** Submits review to database */
   onSubmitReview(): void {
     if (this.reviewForm.valid) {
-      console.log(this.reviewForm.value);
+      switch(this.data.movieOrTvSeries) {
+        case "MOVIES":
+          this._movieReviewsService.createReview(this.reviewForm.value);
+          this._dialogRef.close();
+          break;
+        case "TVSERIES":
+          this._tvReviewsService.createReview(this.reviewForm.value);
+          this._dialogRef.close();
+          break;
+        default:
+          console.log("Movie or Tvseries Error");
+          break;
+      }
     }
-    this._dialogRef.close();
   }
 
   /** Closes Dialog */

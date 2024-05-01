@@ -4,7 +4,7 @@ import { environment } from '../../environments/environment.development';
 import { Observable } from 'rxjs';
 import { MovieDetails } from '../models/movie-details';
 import { DataList, DataListWithDates } from '../models/data-list';
-import { TvSeriesDetails } from '../models/tvseries-details';
+import { TVSeriesDetails } from '../models/tvseries-details';
 
 const APIMOVIEROOT = "https://api.themoviedb.org/3/movie/";
 const APITVSERIESROOT = "https://api.themoviedb.org/3/tv/";
@@ -91,7 +91,7 @@ export class TmdbService {
   }
 
   /** Get TV Series Details */
-  getTVSeriesDetails(series_id: number): Observable<TvSeriesDetails> {
+  getTVSeriesDetails(series_id: number): Observable<TVSeriesDetails> {
     const options = {
       method: 'GET',
       headers: {
@@ -99,7 +99,7 @@ export class TmdbService {
         Authorization: environment.authorizationHeader
       }
     };
-    return this.http.get<TvSeriesDetails>(APITVSERIESROOT + series_id + '?language=en-US', options)
+    return this.http.get<TVSeriesDetails>(APITVSERIESROOT + series_id + '?language=en-US', options)
   }
 
   /** Get searched TV Series list */
