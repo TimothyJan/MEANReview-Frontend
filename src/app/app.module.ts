@@ -16,7 +16,7 @@ import { ReviewsComponent } from './components/pages/reviews/reviews.component';
 import { LoginComponent } from './components/pages/login/login.component';
 import { HomeComponent } from './components/pages/home/home.component';
 import { MoviesComponent } from './components/pages/movies/movies.component';
-import { TvseriesComponent } from './components/pages/tvseries/tvseries.component';
+import { TVSeriesComponent } from './components/pages/tvseries/tvseries.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { CarouselItemComponent } from './components/carousel/carousel-item/carousel-item.component';
@@ -35,7 +35,7 @@ import { StarRatingComponent } from './components/star-rating/star-rating.compon
     LoginComponent,
     HomeComponent,
     MoviesComponent,
-    TvseriesComponent,
+    TVSeriesComponent,
     CarouselComponent,
     LoadingSpinnerComponent,
     CarouselItemComponent,

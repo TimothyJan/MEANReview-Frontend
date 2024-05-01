@@ -4,7 +4,7 @@ import { Language } from "./language";
 import { ProductionCompany } from "./production-company";
 import { ProductionCountry } from "./production-country";
 
-export interface TvSeriesDetails {
+export interface TVSeriesDetails {
   adult: boolean;
   backdrop_path: string;
   created_by: Creator[];

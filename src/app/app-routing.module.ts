@@ -4,12 +4,12 @@ import { HomeComponent } from './components/pages/home/home.component';
 import { ReviewsComponent } from './components/pages/reviews/reviews.component';
 import { LoginComponent } from './components/pages/login/login.component';
 import { MoviesComponent } from './components/pages/movies/movies.component';
-import { TvseriesComponent } from './components/pages/tvseries/tvseries.component';
+import { TVSeriesComponent } from './components/pages/tvseries/tvseries.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'movies', component: MoviesComponent },
-  { path: 'tvseries', component: TvseriesComponent },
+  { path: 'tvseries', component: TVSeriesComponent },
   { path: 'reviews', component: ReviewsComponent },
   { path: 'login', component: LoginComponent },
   // redirect to `home` if there is no path
