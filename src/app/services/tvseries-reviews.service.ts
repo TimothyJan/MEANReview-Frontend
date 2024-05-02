@@ -26,8 +26,13 @@ export class TVseriesReviewsService {
   }
 
   /** Get Review */
-  getReview(id:number): any {
-    return this.allTVSeriesReviews[id-1];
+  getReview(id:number): TVSeriesReview | undefined {
+    for(let i=0; i<this.allTVSeriesReviews.length; i++) {
+      if(this.allTVSeriesReviews[i].tvSeriesId == id) {
+        return this.allTVSeriesReviews[i];
+      }
+    }
+    return undefined;
   }
 
   /** Update Review */

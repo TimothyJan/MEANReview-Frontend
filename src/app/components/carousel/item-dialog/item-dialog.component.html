@@ -36,13 +36,14 @@
             <p>{{ movieDetails.overview }}</p>
           </div>
 
-          <form [formGroup]="reviewForm" (ngSubmit)="onSubmitReview()">
+          <form [formGroup]="reviewForm" (ngSubmit)="onCreateReview()">
             <div class="review-container">
               <!-- Rating -->
               <div class="review-item">
                 <mat-label>Rating (out of 5):</mat-label>
                 <br>
-                <app-star-rating [rating]=0 (ratingChange)="setRating($event)"></app-star-rating>
+                <!-- <app-star-rating [(rating)]="rating"></app-star-rating> -->
+                <app-star-rating [rating]="reviewRating" [canEditRating]="true" (ratingChange)="setRating($event)"></app-star-rating>
                 <!-- <input matInput type="number" min="0" max="5" formControlName="rating"> -->
               </div>
               <!-- Rating Error -->
@@ -91,13 +92,14 @@
             <p>{{ tvSeriesDetails.overview }}</p>
           </div>
 
-          <form [formGroup]="reviewForm" (ngSubmit)="onSubmitReview()">
+          <form [formGroup]="reviewForm" (ngSubmit)="onCreateReview()">
             <div class="review-container">
               <!-- Rating -->
               <div class="review-item">
                 <mat-label>Rating (out of 5):</mat-label>
                 <br>
-                <app-star-rating [rating]=0 (ratingChange)="setRating($event)"></app-star-rating>
+                <app-star-rating [rating]="reviewRating" [canEditRating]="true" (ratingChange)="setRating($event)"></app-star-rating>
+                <!-- <app-star-rating [rating]=0 (ratingChange)="setRating($event)"></app-star-rating> -->
                 <!-- <input matInput type="number" min="0" max="5" formControlName="rating"> -->
               </div>
             <div class="rating-error">
@@ -132,7 +134,7 @@
 
         <!-- Buttons -->
         <div class="dialog-buttons">
-          <button mat-raised-button (click)="onSubmitReview()">Add Review</button>
+          <button mat-raised-button (click)="onCreateReview()">Add Review</button>
         </div>
 
       </div>

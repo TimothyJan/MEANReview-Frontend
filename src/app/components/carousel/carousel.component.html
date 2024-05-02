@@ -9,7 +9,12 @@
       <div *ngIf="items.length>0; else noReviews">
         <div class="carousel-inner" [style.transform]="'translateX(' + offsetX + 'px)'">
           <div class="carousel-item" *ngFor="let item of items">
-            <app-carousel-item [id]="item" [movieOrTvSeries]="movieOrTvSeries"></app-carousel-item>
+            <div *ngIf="!reviewCarousel; else reviewCarouselItem">
+              <app-carousel-item [id]="item" [movieOrTvSeries]="movieOrTvSeries"></app-carousel-item>
+            </div>
+            <ng-template #reviewCarouselItem>
+              <app-carousel-review-item [id]="item" [movieOrTvSeries]="movieOrTvSeries"></app-carousel-review-item>
+            </ng-template>
           </div>
         </div>
       </div>

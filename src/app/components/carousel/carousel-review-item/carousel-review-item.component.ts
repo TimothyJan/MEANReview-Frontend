@@ -4,22 +4,29 @@ import { MovieDetails } from '../../../models/movie-details';
 import { TVSeriesDetails } from '../../../models/tvseries-details';
 import { MatDialog } from '@angular/material/dialog';
 import { ItemDialogComponent } from '../item-dialog/item-dialog.component';
+import { MovieReviewsService } from '../../../services/movie-reviews.service';
+import { TVseriesReviewsService } from '../../../services/tvseries-reviews.service';
 
 @Component({
-  selector: 'app-carousel-item',
-  templateUrl: './carousel-item.component.html',
-  styleUrl: './carousel-item.component.css'
+  selector: 'app-carousel-review-item',
+  templateUrl: './carousel-review-item.component.html',
+  styleUrl: './carousel-review-item.component.css'
 })
-export class CarouselItemComponent implements OnInit {
-  @Input() id: number = 0;
+export class CarouselReviewItemComponent {
+  @Input() id: number = 0; // Movie or TV id
   @Input() movieOrTvSeries: string = ""; // MOVIES or TVSERIES****
   movieDetails: MovieDetails;
   tvSeriesDetails: TVSeriesDetails;
   loadingData: boolean = true;
 
+  // For star highlight component input to display highlighted stars in review mode
+  reviewRating: number = 0;
+
   constructor(
     private _tmdbService: TmdbService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private _movieReviewsService: MovieReviewsService,
+    private _tvReviewsService: TVseriesReviewsService
   ) {}
 
   ngOnInit(): void {
@@ -44,6 +51,7 @@ export class CarouselItemComponent implements OnInit {
         // console.log(data);
         this.movieDetails = {...data};
         this.setMovieCardDetails();
+        this.setStarRating();
         this.loadingData = false;
       },
       error => {
@@ -65,6 +73,7 @@ export class CarouselItemComponent implements OnInit {
       // console.log(data);
       this.tvSeriesDetails = {...data};
       this.setTvSeriesCardDetails();
+      this.setStarRating();
       this.loadingData = false;
       },
       error => {
@@ -76,6 +85,29 @@ export class CarouselItemComponent implements OnInit {
   /** Set TV Series Details */
   setTvSeriesCardDetails(): void {
     this.tvSeriesDetails.poster_path = `https://image.tmdb.org/t/p/original/` + this.tvSeriesDetails.poster_path;
+  }
+
+  setStarRating(): void {
+    // for star highlight
+    switch(this.movieOrTvSeries) {
+      case "MOVIES":
+        let currentMovieReview = this._movieReviewsService.getReview(this.id);
+        console.log(currentMovieReview);
+        if (currentMovieReview != undefined) {
+          this.reviewRating = currentMovieReview.rating;
+        }
+        break;
+      case "TVSERIES":
+        let currentTVSeriesReview = this._tvReviewsService.getReview(this.id);
+        console.log(currentTVSeriesReview);
+        if(currentTVSeriesReview != undefined) {
+          this.reviewRating = currentTVSeriesReview.rating;
+        }
+        break;
+      default:
+        console.log("Movie or Tvseries Error");
+        break;
+    }
   }
 
   /** Open Dialog */

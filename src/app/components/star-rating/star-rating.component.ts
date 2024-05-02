@@ -1,12 +1,13 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-star-rating',
   templateUrl: './star-rating.component.html',
   styleUrl: './star-rating.component.css'
 })
-export class StarRatingComponent {
+export class StarRatingComponent implements OnInit, OnChanges {
   @Input() rating: number;
+  @Input() canEditRating: boolean = false;
   @Output() ratingChange = new EventEmitter<number>();
 
   currentRating: number;
@@ -17,10 +18,14 @@ export class StarRatingComponent {
   }
 
   ngOnInit() {
+    this.resetStars();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
     this.currentRating = this.rating;
   }
 
-  /** Highlight */
+  /** Highlight from mouse event*/
   highlightStar(event: MouseEvent) {
     const dataValue = (event.target as HTMLElement).getAttribute('data-value');
     if (dataValue !== null) {

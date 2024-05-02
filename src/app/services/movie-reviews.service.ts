@@ -25,9 +25,14 @@ export class MovieReviewsService {
     return this.allMovieReviews;
   }
 
-  /** Get Review */
-  getReview(id:number): any {
-    return this.allMovieReviews[id-1];
+  /** Get Review based off movie id*/
+  getReview(id:number): MovieReview | undefined {
+    for(let i=0; i<this.allMovieReviews.length; i++) {
+      if(this.allMovieReviews[i].movieId == id) {
+        return this.allMovieReviews[i];
+      }
+    }
+    return undefined;
   }
 
   /** Update Review */

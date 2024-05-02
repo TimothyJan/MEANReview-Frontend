@@ -7,6 +7,7 @@ import { TmdbService } from '../../../services/tmdb.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MovieReviewsService } from '../../../services/movie-reviews.service';
 import { TVseriesReviewsService } from '../../../services/tvseries-reviews.service';
+import { MovieReview, TVSeriesReview } from '../../../models/review';
 
 @Component({
   selector: 'app-item-dialog',
@@ -15,10 +16,16 @@ import { TVseriesReviewsService } from '../../../services/tvseries-reviews.servi
 })
 export class ItemDialogComponent {
 
+  // Checks if data is loaded, if not displays loading spinner component
   loadingData: boolean = true;
+
+  // For data and display
   movieDetails: MovieDetails;
   tvSeriesDetails: TVSeriesDetails;
   genreList: string = "";
+
+  // For star highlight component input to display highlighted stars in review mode
+  reviewRating: number = 0;
 
   reviewForm  = new FormGroup({
     movieId: new FormControl({value: 0, disabled: false}),
@@ -36,17 +43,25 @@ export class ItemDialogComponent {
     private _tvReviewsService: TVseriesReviewsService
   ) {}
 
+  /** Get movie/tvseries details and review details to populate component */
   ngOnInit(): void {
     this._dialogRef.updateSize("1050px", "500px");
-    /** Get movie details to populate component, disable id per movieOrTvSeries */
     switch(this.data.movieOrTvSeries) {
       case "MOVIES":
         this.getMovieDetails();
+        if(this._movieReviewsService.getReview(this.data.id)) {
+          this.setReviewDetails(this.data.id);
+        }
+        //disable id based on movieOrTvSeries
         this.reviewForm.controls['tvSeriesId'].disable();
         this.reviewForm.controls['movieId'].setValue(this.data.id);
         break;
       case "TVSERIES":
         this.getTvSeriesDetails();
+        if(this._tvReviewsService.getReview(this.data.id)) {
+          this.setReviewDetails(this.data.id);
+        }
+        // disable id based on movieOrTvSeries
         this.reviewForm.controls['movieId'].disable();
         this.reviewForm.controls['tvSeriesId'].setValue(this.data.id);
         break;
@@ -108,12 +123,40 @@ export class ItemDialogComponent {
   }
 
   /** Sets rating value from the star-rating component */
-  setRating(setRating: number): void {
-    this.reviewForm.controls['rating'].setValue(setRating);
+  setRating(rating: number): void {
+    // for star highlight
+    this.reviewRating = rating;
+    // for form
+    this.reviewForm.controls['rating'].setValue(rating);
+  }
+
+  /** Get review data and sets it */
+  setReviewDetails(id:number): void {
+    switch(this.data.movieOrTvSeries) {
+      case "MOVIES":
+        let currentMovieReview = this._movieReviewsService.getReview(id);
+        console.log(currentMovieReview);
+        if (currentMovieReview != undefined) {
+          this.setRating(currentMovieReview.rating);
+          this.reviewForm.controls['review'].setValue(currentMovieReview.review);
+        }
+        break;
+      case "TVSERIES":
+        let currentTVSeriesReview = this._tvReviewsService.getReview(id);
+        console.log(currentTVSeriesReview);
+        if(currentTVSeriesReview != undefined) {
+          this.setRating(currentTVSeriesReview.rating);
+          this.reviewForm.controls['review'].setValue(currentTVSeriesReview.review);
+        }
+        break;
+      default:
+        console.log("Movie or Tvseries Error");
+        break;
+    }
   }
 
   /** Submits review to database */
-  onSubmitReview(): void {
+  onCreateReview(): void {
     if (this.reviewForm.valid) {
       switch(this.data.movieOrTvSeries) {
         case "MOVIES":

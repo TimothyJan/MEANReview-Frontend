@@ -9,9 +9,12 @@ import { TVseriesReviewsService } from '../../services/tvseries-reviews.service'
   styleUrl: './carousel.component.css'
 })
 export class CarouselComponent implements OnInit, OnChanges {
+  // TMDB preset lists or search function
   @Input() dataListType:string = "";
+
   @Input() movieOrTvSeries: string = "";
   @Input() query: string = "";
+  @Input() reviewCarousel: boolean = false;
   title:string = ""
 
   items: number[] = [];
