@@ -178,6 +178,23 @@ export class ItemEditDialogComponent {
     }
   }
 
+  /** Delete Review */
+  onDeleteReview(): void {
+    switch(this.data.movieOrTvSeries) {
+      case "MOVIES":
+        this._movieReviewsService.deleteReview(this.data.id);
+        this._dialogRef.close();
+        break;
+      case "TVSERIES":
+        this._tvReviewsService.deleteReview(this.data.id);
+        this._dialogRef.close();
+        break;
+      default:
+        console.log("Movie or Tvseries Error");
+        break;
+    }
+  }
+
   /** Closes Dialog */
   onCloseDialog(): void {
     this._dialogRef.close();

@@ -47,7 +47,11 @@ export class MovieReviewsService {
 
   /** Delete Review */
   deleteReview(id:number): void {
-    this.allMovieReviews.splice(id-1, 1);
+    for(let i=0; i<this.allMovieReviews.length; i++) {
+      if(this.allMovieReviews[i].movieId == id) {
+        this.allMovieReviews.splice(i, 1);
+      }
+    }
   }
 
 }
