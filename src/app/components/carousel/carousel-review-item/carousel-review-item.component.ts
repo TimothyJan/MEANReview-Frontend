@@ -1,18 +1,18 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { TmdbService } from '../../../services/tmdb.service';
 import { MovieDetails } from '../../../models/movie-details';
 import { TVSeriesDetails } from '../../../models/tvseries-details';
 import { MatDialog } from '@angular/material/dialog';
-import { ItemDialogComponent } from '../item-dialog/item-dialog.component';
 import { MovieReviewsService } from '../../../services/movie-reviews.service';
 import { TVseriesReviewsService } from '../../../services/tvseries-reviews.service';
+import { ItemEditDialogComponent } from '../item-edit-dialog/item-edit-dialog.component';
 
 @Component({
   selector: 'app-carousel-review-item',
   templateUrl: './carousel-review-item.component.html',
   styleUrl: './carousel-review-item.component.css'
 })
-export class CarouselReviewItemComponent {
+export class CarouselReviewItemComponent implements OnInit {
   @Input() id: number = 0; // Movie or TV id
   @Input() movieOrTvSeries: string = ""; // MOVIES or TVSERIES****
   movieDetails: MovieDetails;
@@ -42,6 +42,7 @@ export class CarouselReviewItemComponent {
         break;
     }
   }
+
 
   /** Get Movie Details */
   getMovieDetails(): void {
@@ -92,14 +93,14 @@ export class CarouselReviewItemComponent {
     switch(this.movieOrTvSeries) {
       case "MOVIES":
         let currentMovieReview = this._movieReviewsService.getReview(this.id);
-        console.log(currentMovieReview);
+        // console.log(currentMovieReview);
         if (currentMovieReview != undefined) {
           this.reviewRating = currentMovieReview.rating;
         }
         break;
       case "TVSERIES":
         let currentTVSeriesReview = this._tvReviewsService.getReview(this.id);
-        console.log(currentTVSeriesReview);
+        // console.log(currentTVSeriesReview);
         if(currentTVSeriesReview != undefined) {
           this.reviewRating = currentTVSeriesReview.rating;
         }
@@ -111,8 +112,8 @@ export class CarouselReviewItemComponent {
   }
 
   /** Open Dialog */
-  openDialog(): void {
-    const dialogRef = this.dialog.open(ItemDialogComponent, {
+  openEditDialog(): void {
+    const dialogRef = this.dialog.open(ItemEditDialogComponent, {
       data: {
         id: this.id,
         movieOrTvSeries: this.movieOrTvSeries

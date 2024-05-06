@@ -1,19 +1,20 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { ItemIdType } from '../../../models/item-id-type';
 import { MovieDetails } from '../../../models/movie-details';
 import { TVSeriesDetails } from '../../../models/tvseries-details';
-import { TmdbService } from '../../../services/tmdb.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MovieReviewsService } from '../../../services/movie-reviews.service';
+import { TmdbService } from '../../../services/tmdb.service';
 import { TVseriesReviewsService } from '../../../services/tvseries-reviews.service';
+import { ItemDialogComponent } from '../item-dialog/item-dialog.component';
 
 @Component({
-  selector: 'app-item-dialog',
-  templateUrl: './item-dialog.component.html',
-  styleUrl: './item-dialog.component.css'
+  selector: 'app-item-edit-dialog',
+  templateUrl: './item-edit-dialog.component.html',
+  styleUrl: './item-edit-dialog.component.css'
 })
-export class ItemDialogComponent {
+export class ItemEditDialogComponent {
 
   // Checks if data is loaded, if not displays loading spinner component
   loadingData: boolean = true;
@@ -134,7 +135,7 @@ export class ItemDialogComponent {
     switch(this.data.movieOrTvSeries) {
       case "MOVIES":
         let currentMovieReview = this._movieReviewsService.getReview(id);
-        console.log(currentMovieReview);
+        // console.log(currentMovieReview);
         if (currentMovieReview != undefined) {
           this.setRating(currentMovieReview.rating);
           this.reviewForm.controls['review'].setValue(currentMovieReview.review);
@@ -142,7 +143,7 @@ export class ItemDialogComponent {
         break;
       case "TVSERIES":
         let currentTVSeriesReview = this._tvReviewsService.getReview(id);
-        console.log(currentTVSeriesReview);
+        // console.log(currentTVSeriesReview);
         if(currentTVSeriesReview != undefined) {
           this.setRating(currentTVSeriesReview.rating);
           this.reviewForm.controls['review'].setValue(currentTVSeriesReview.review);
@@ -155,15 +156,19 @@ export class ItemDialogComponent {
   }
 
   /** Submits review to database */
-  onCreateReview(): void {
+  onEditReview(): void {
     if (this.reviewForm.valid) {
       switch(this.data.movieOrTvSeries) {
         case "MOVIES":
-          this._movieReviewsService.createReview(this.reviewForm.value);
+          let newMovieRating = this.reviewForm.value.rating || 0;
+          let newMovieReview = this.reviewForm.value.review || "";
+          this._movieReviewsService.editReview(this.data.id, newMovieRating, newMovieReview);
           this._dialogRef.close();
           break;
         case "TVSERIES":
-          this._tvReviewsService.createReview(this.reviewForm.value);
+          let newTVSeriesRating = this.reviewForm.value.rating || 0;
+          let newTVSeriesReview = this.reviewForm.value.review || "";
+          this._tvReviewsService.editReview(this.data.id, newTVSeriesRating, newTVSeriesReview);
           this._dialogRef.close();
           break;
         default:

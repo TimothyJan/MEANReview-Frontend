@@ -8,7 +8,6 @@ import { BehaviorSubject } from 'rxjs';
 export class TVseriesReviewsService {
 
   allTVSeriesReviews: TVSeriesReview[] = [];
-  public reviewsChanged: BehaviorSubject<string> = new BehaviorSubject<string>("None");
 
   constructor() { }
 
@@ -36,8 +35,13 @@ export class TVseriesReviewsService {
   }
 
   /** Update Review */
-  updateReview(id:number, data:any){
-    this.allTVSeriesReviews[id-1] = data;
+  editReview(id:number, newRating: number, newReview: string): void {
+    for(let i=0; i<this.allTVSeriesReviews.length; i++) {
+      if(this.allTVSeriesReviews[i].tvSeriesId == id) {
+        this.allTVSeriesReviews[i].rating = newRating;
+        this.allTVSeriesReviews[i].review = newReview;
+      }
+    }
   }
 
   /** Delete Review */

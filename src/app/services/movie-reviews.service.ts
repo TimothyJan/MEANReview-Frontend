@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MovieReview } from '../models/review';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 export class MovieReviewsService {
 
   allMovieReviews: MovieReview[] = [];
-  public reviewsChanged: BehaviorSubject<string> = new BehaviorSubject<string>("None");
+  // allMovieReviewsSubject: Subject<MovieReview[]> = new Subject<MovieReview[]>();
 
   constructor() { }
 
@@ -36,8 +36,13 @@ export class MovieReviewsService {
   }
 
   /** Update Review */
-  updateReview(id:number, data:any){
-    this.allMovieReviews[id-1] = data;
+  editReview(id:number, newRating: number, newReview: string): void {
+    for(let i=0; i<this.allMovieReviews.length; i++) {
+      if(this.allMovieReviews[i].movieId == id) {
+        this.allMovieReviews[i].rating = newRating;
+        this.allMovieReviews[i].review = newReview;
+      }
+    }
   }
 
   /** Delete Review */

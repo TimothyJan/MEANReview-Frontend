@@ -25,6 +25,7 @@ import { SearchComponent } from './components/search/search.component';
 import { ItemDialogComponent } from './components/carousel/item-dialog/item-dialog.component';
 import { StarRatingComponent } from './components/star-rating/star-rating.component';
 import { CarouselReviewItemComponent } from './components/carousel/carousel-review-item/carousel-review-item.component';
+import { ItemEditDialogComponent } from './components/carousel/item-edit-dialog/item-edit-dialog.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { CarouselReviewItemComponent } from './components/carousel/carousel-revi
     ItemDialogComponent,
     StarRatingComponent,
     CarouselReviewItemComponent,
+    ItemEditDialogComponent,
   ],
   imports: [
     BrowserModule,
