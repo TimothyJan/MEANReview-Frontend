@@ -4,9 +4,11 @@
     <!-- Sidenav Content -->
     <mat-sidenav-content>
       <div class="header">
-        <nav class="nav-bar">
-          <app-title></app-title>
 
+        <div class="nav-bar-title">
+          <app-title></app-title>
+        </div>
+        <div class="nav-bar-menu">
           <ul class="nav-bar-list">
             <li
               class="nav-bar-list-items"
@@ -18,7 +20,8 @@
               </a>
             </li>
           </ul>
-        </nav>
+        </div>
+
       </div>
       <router-outlet></router-outlet>
       <app-footer></app-footer>

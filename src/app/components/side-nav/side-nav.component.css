@@ -8,7 +8,7 @@
 
 mat-sidenav {
   /* width: 150px; */
-  width: 250px;
+  width: 200px;
   height: 100%;
   padding: 32px;
   background-color: #0d253f;
@@ -24,7 +24,7 @@ mat-sidenav {
 .exit-sidenav {
   position: absolute;
   top: 1.5rem;
-  left: 12rem;
+  left: 9rem;
   z-index: 100;
 }
 
@@ -61,26 +61,14 @@ li {
 }
 
 .header {
-  padding: 12px 12px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
   justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   background-color: #0d253f;
+  padding: 12px 12px;
 }
 
 @media screen and (min-width: 768px) {
-  /* .nav-bar{
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-  } */
-
   .nav-bar {
     display: flex;
     justify-content: flex-start;
@@ -89,11 +77,22 @@ li {
     overflow: visible;
   }
 
+  .nav-bar-title {
+    width: 50%;
+    padding-left: 10px;
+  }
+
+  .nav-bar-menu {
+    width: 50%;
+    padding-right: 10px;
+    text-align: right;
+  }
+
   .nav-bar-list{
     flex-wrap: wrap;
     max-width: 860px;
     -webkit-box-pack: center;
-    justify-content: center;
+    justify-content: flex-end;
     display: flex;
   }
 

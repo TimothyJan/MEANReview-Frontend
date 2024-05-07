@@ -3,11 +3,15 @@
 }
 
 .carousel {
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
   overflow: hidden;
   position: relative;
-  padding-bottom: 2rem;
+  padding-bottom: 12px;
+}
+
+h3 {
+  margin: 12px;
 }
 
 .carousel-title {
