@@ -33,6 +33,21 @@ export class CarouselComponent implements OnInit {
   ngOnInit(): void {
     this.setTitle();
     this.setItems();
+    switch(this.movieOrTvSeries) {
+      case "MOVIES":
+        this._movieReviewsService.movieReviewsChanged.subscribe(value => {
+          this.setItems();
+        });
+        break;
+      case "TVSERIES":
+        this._tvSeriesReviewsService.tvSeriesReviewsChanged.subscribe(value => {
+          this.setItems();
+        });
+        break;
+      default:
+        console.log("Movie or Tvseries Error");
+        break;
+    }
   }
 
   /** When query search is changed, carousel item list is reset */

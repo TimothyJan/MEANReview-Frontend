@@ -26,7 +26,7 @@ export class CarouselReviewItemComponent implements OnInit {
     private _tmdbService: TmdbService,
     public dialog: MatDialog,
     private _movieReviewsService: MovieReviewsService,
-    private _tvReviewsService: TVseriesReviewsService
+    private _tvSeriesReviewsService: TVseriesReviewsService
   ) {}
 
   ngOnInit(): void {
@@ -39,8 +39,8 @@ export class CarouselReviewItemComponent implements OnInit {
         break;
       case "TVSERIES":
         this.getTvSeriesDetails();
-        this._tvReviewsService.tvSeriesReviewsChanged.subscribe(value => {
-          this.reviewRating = this._tvReviewsService.getReview(this.id).rating;
+        this._tvSeriesReviewsService.tvSeriesReviewsChanged.subscribe(value => {
+          this.reviewRating = this._tvSeriesReviewsService.getReview(this.id).rating;
         });
         break;
       default:
@@ -104,7 +104,7 @@ export class CarouselReviewItemComponent implements OnInit {
         }
         break;
       case "TVSERIES":
-        let currentTVSeriesReview = this._tvReviewsService.getReview(this.id);
+        let currentTVSeriesReview = this._tvSeriesReviewsService.getReview(this.id);
         // console.log(currentTVSeriesReview);
         if(currentTVSeriesReview != undefined) {
           this.reviewRating = currentTVSeriesReview.rating;
