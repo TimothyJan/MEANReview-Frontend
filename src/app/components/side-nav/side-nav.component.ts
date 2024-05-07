@@ -13,7 +13,7 @@ export class SideNavComponent {
     { path: '/movies', label: 'Movies' },
     { path: '/tvseries', label: 'TV Shows' },
     { path: '/reviews', label: 'Reviews' },
-    { path: '/login', label: 'Login' },
+    // { path: '/login', label: 'Login' },
   ];
 
   constructor() {
