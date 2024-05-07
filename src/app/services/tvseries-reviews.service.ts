@@ -8,6 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 export class TVseriesReviewsService {
 
   allTVSeriesReviews: TVSeriesReview[] = [];
+  public tvSeriesReviewsChanged: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor() { }
 
@@ -17,6 +18,7 @@ export class TVseriesReviewsService {
     let review = data;
     review.reviewId = reviewID
     this.allTVSeriesReviews.push(review);
+    this.tvSeriesReviewsChanged.next(true);
   }
 
   /** Get all Reviews */
@@ -24,14 +26,14 @@ export class TVseriesReviewsService {
     return this.allTVSeriesReviews;
   }
 
-  /** Get Review */
-  getReview(id:number): TVSeriesReview | undefined {
+  /** Get Review based off tvseries id*/
+  getReview(id:number): TVSeriesReview {
     for(let i=0; i<this.allTVSeriesReviews.length; i++) {
       if(this.allTVSeriesReviews[i].tvSeriesId == id) {
         return this.allTVSeriesReviews[i];
       }
     }
-    return undefined;
+    return new TVSeriesReview(0,0,"");
   }
 
   /** Update Review */
@@ -42,10 +44,16 @@ export class TVseriesReviewsService {
         this.allTVSeriesReviews[i].review = newReview;
       }
     }
+    this.tvSeriesReviewsChanged.next(true);
   }
 
   /** Delete Review */
   deleteReview(id:number): void {
-    this.allTVSeriesReviews.splice(id-1, 1);
+    for(let i=0; i<this.allTVSeriesReviews.length; i++) {
+      if(this.allTVSeriesReviews[i].tvSeriesId == id) {
+        this.allTVSeriesReviews.splice(i,1);
+      }
+    }
+    this.tvSeriesReviewsChanged.next(true);
   }
 }

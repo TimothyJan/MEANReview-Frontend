@@ -134,7 +134,7 @@ export class ItemDialogComponent {
     switch(this.data.movieOrTvSeries) {
       case "MOVIES":
         let currentMovieReview = this._movieReviewsService.getReview(id);
-        console.log(currentMovieReview);
+        // console.log(currentMovieReview);
         if (currentMovieReview != undefined) {
           this.setRating(currentMovieReview.rating);
           this.reviewForm.controls['review'].setValue(currentMovieReview.review);
@@ -142,7 +142,7 @@ export class ItemDialogComponent {
         break;
       case "TVSERIES":
         let currentTVSeriesReview = this._tvReviewsService.getReview(id);
-        console.log(currentTVSeriesReview);
+        // console.log(currentTVSeriesReview);
         if(currentTVSeriesReview != undefined) {
           this.setRating(currentTVSeriesReview.rating);
           this.reviewForm.controls['review'].setValue(currentTVSeriesReview.review);

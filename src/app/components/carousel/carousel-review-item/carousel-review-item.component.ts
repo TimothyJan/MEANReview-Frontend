@@ -20,7 +20,7 @@ export class CarouselReviewItemComponent implements OnInit {
   loadingData: boolean = true;
 
   // For star highlight component input to display highlighted stars in review mode
-  reviewRating: number = 0;
+  reviewRating: number;
 
   constructor(
     private _tmdbService: TmdbService,
@@ -33,16 +33,21 @@ export class CarouselReviewItemComponent implements OnInit {
     switch(this.movieOrTvSeries) {
       case "MOVIES":
         this.getMovieDetails();
+        this._movieReviewsService.movieReviewsChanged.subscribe(value => {
+          this.reviewRating = this._movieReviewsService.getReview(this.id).rating;
+        });
         break;
       case "TVSERIES":
         this.getTvSeriesDetails();
+        this._tvReviewsService.tvSeriesReviewsChanged.subscribe(value => {
+          this.reviewRating = this._tvReviewsService.getReview(this.id).rating;
+        });
         break;
       default:
         console.log("Movie or Tvseries Error");
         break;
     }
   }
-
 
   /** Get Movie Details */
   getMovieDetails(): void {

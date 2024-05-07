@@ -8,7 +8,7 @@ import { TVseriesReviewsService } from '../../services/tvseries-reviews.service'
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.css'
 })
-export class CarouselComponent implements OnInit, OnChanges {
+export class CarouselComponent implements OnInit {
   // TMDB preset lists or search function
   @Input() dataListType:string = "";
 
@@ -37,7 +37,6 @@ export class CarouselComponent implements OnInit, OnChanges {
 
   /** When query search is changed, carousel item list is reset */
   ngOnChanges(changes: SimpleChanges): void {
-    this.setItems();
   }
 
   /** Sets Title or Carousel */

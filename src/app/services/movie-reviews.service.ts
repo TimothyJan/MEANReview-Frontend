@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MovieReview } from '../models/review';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,7 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 export class MovieReviewsService {
 
   allMovieReviews: MovieReview[] = [];
-  // allMovieReviewsSubject: Subject<MovieReview[]> = new Subject<MovieReview[]>();
+  public movieReviewsChanged: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor() { }
 
@@ -18,6 +18,7 @@ export class MovieReviewsService {
     let review = data;
     review.reviewId = reviewID
     this.allMovieReviews.push(review);
+    this.movieReviewsChanged.next(true);
   }
 
   /** Get all Reviews */
@@ -26,13 +27,13 @@ export class MovieReviewsService {
   }
 
   /** Get Review based off movie id*/
-  getReview(id:number): MovieReview | undefined {
+  getReview(id:number): MovieReview {
     for(let i=0; i<this.allMovieReviews.length; i++) {
       if(this.allMovieReviews[i].movieId == id) {
         return this.allMovieReviews[i];
       }
     }
-    return undefined;
+    return new MovieReview(0,0,"");
   }
 
   /** Update Review */
@@ -43,6 +44,7 @@ export class MovieReviewsService {
         this.allMovieReviews[i].review = newReview;
       }
     }
+    this.movieReviewsChanged.next(true);
   }
 
   /** Delete Review */
@@ -52,6 +54,7 @@ export class MovieReviewsService {
         this.allMovieReviews.splice(i, 1);
       }
     }
+    this.movieReviewsChanged.next(true);
   }
 
 }

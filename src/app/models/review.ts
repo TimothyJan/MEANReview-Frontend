@@ -1,13 +1,18 @@
-export interface Review {
+export class Review {
   reviewId: number;
   rating: number;
   review: string;
+  constructor(reviewId:number, rating:number, review: string) {
+    this.reviewId = reviewId;
+    this.rating = rating;
+    this.review = review;
+  }
 }
 
-export interface MovieReview extends Review {
+export class MovieReview extends Review {
   movieId: number;
 }
 
-export interface TVSeriesReview extends Review {
+export class TVSeriesReview extends Review {
   tvSeriesId: number;
 }
