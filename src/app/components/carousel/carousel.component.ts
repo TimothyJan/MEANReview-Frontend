@@ -52,6 +52,7 @@ export class CarouselComponent implements OnInit {
 
   /** When query search is changed, carousel item list is reset */
   ngOnChanges(changes: SimpleChanges): void {
+    this.setItems();
   }
 
   /** Sets Title or Carousel */
