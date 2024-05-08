@@ -1,5 +1,8 @@
 import { Component, HostListener } from '@angular/core';
 
+// const largeScreenSize = 768;
+const largeScreenSize = 930;
+
 @Component({
   selector: 'app-side-nav',
   templateUrl: './side-nav.component.html',
@@ -13,7 +16,7 @@ export class SideNavComponent {
     { path: '/movies', label: 'Movies' },
     { path: '/tvseries', label: 'TV Shows' },
     { path: '/reviews', label: 'Reviews' },
-    // { path: '/login', label: 'Login' },
+    { path: '/login', label: 'Login' },
   ];
 
   constructor() {
@@ -27,7 +30,7 @@ export class SideNavComponent {
 
   /** Changes css based on screen size */
   checkScreenSize() {
-    this.isLargeScreen = window.innerWidth > 768; // Adjust breakpoint as needed
+    this.isLargeScreen = window.innerWidth > largeScreenSize; // Adjust breakpoint as needed
   }
 
 }

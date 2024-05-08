@@ -68,7 +68,16 @@ li {
   padding: 12px 12px;
 }
 
-@media screen and (min-width: 768px) {
+/* @media screen and (min-width: 768px) { */
+@media screen and (min-width: 930px) {
+  .header {
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    background-color: #0d253f;
+    padding: 12px 12px;
+  }
+
   .nav-bar {
     display: flex;
     justify-content: flex-start;
@@ -83,7 +92,8 @@ li {
   }
 
   .nav-bar-menu {
-    width: 50%;
+    display: flex;
+    align-items:flex-end;
     padding-right: 10px;
     text-align: right;
   }
@@ -109,5 +119,13 @@ li {
     height: 100%;
     color: #fff;
     font-weight: 600;
+  }
+
+  ul{
+    display: flex;
+    display: flex-end;
+    margin: 0rem;
+    padding: 0rem;
+    list-style: none;
   }
 }
