@@ -8,7 +8,7 @@ const largeScreenSize = 930;
   templateUrl: './side-nav.component.html',
   styleUrl: './side-nav.component.css'
 })
-export class SideNavComponent {
+export class SideNavComponent{
   isLargeScreen: boolean = true;
 
   navLinks = [
